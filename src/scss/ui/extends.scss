@@ -1,0 +1,71 @@
+%mainBorder {
+   border: 1px solid rgba(255, 255, 255, 0.7);
+}
+%boxBg {
+   @extend %mainBorder;
+   border-radius: 10px;
+   background: linear-gradient(180deg, rgba(13, 63, 63, 0.4) 0%, rgba(0, 0, 0, 0) 100%);
+   position: relative;
+   z-index: 2;
+   & > * {
+      position: relative;
+      z-index: 2;
+   }
+   &::after {
+      content: '';
+      display: block;
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      top: 0;
+      left: 0;
+      backdrop-filter: blur(24.5px);
+      z-index: 1;
+      border-radius: 10px;
+   }
+}
+%borderBottom {
+   position: relative;
+   z-index: 2;
+   &::after {
+      content: '';
+      position: absolute;
+      width: 100%;
+      bottom: 0;
+      left: 0;
+      height: 1px;
+      display: block;
+      background: linear-gradient(0.25turn, rgba(225, 225, 225, 0), rgba(225, 225, 225, 0.3), rgba(225, 225, 225, 0));
+      z-index: 1;
+   }
+}
+%borderTop {
+   position: relative;
+   z-index: 2;
+   &::after {
+      content: '';
+      position: absolute;
+      width: 100%;
+      top: 0;
+      left: 0;
+      height: 1px;
+      display: block;
+      background: linear-gradient(0.25turn, rgba(225, 225, 225, 0), rgba(225, 225, 225, 0.3), rgba(225, 225, 225, 0));
+      z-index: 1;
+   }
+}
+%borderRight {
+   position: relative;
+   z-index: 2;
+   &::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      right: 0;
+      height: 100%;
+      width: 1px;
+      display: block;
+      background: linear-gradient(0.5turn, rgba(225, 225, 225, 0), rgba(225, 225, 225, 0.3), rgba(225, 225, 225, 0));
+      z-index: 1;
+   }
+}

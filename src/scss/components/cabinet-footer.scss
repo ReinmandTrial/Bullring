@@ -1,0 +1,16 @@
+.cabinet-footer {
+   background-color: black;
+   &__container {
+   }
+
+   &__content {
+      padding: 20px;
+      @extend %borderTop;
+   }
+
+   &__text {
+      font-size: 14px;
+      text-align: center;
+      text-transform: capitalize;
+   }
+}
