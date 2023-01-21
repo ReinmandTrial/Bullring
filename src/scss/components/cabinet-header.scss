@@ -216,7 +216,7 @@
    max-width: 145px;
    min-height: 45px;
    width: 100%;
-   padding: 0 20px;
+   padding: 5px 20px;
    @extend %boxBg;
    @media (max-width: 991.98px) {
       .cabinet-header__body & {
@@ -254,6 +254,7 @@
    max-width: 145px;
    width: 100%;
    padding: 3px 20px;
+   height: 45px;
    @media (max-width: 991.98px) {
       .cabinet-header__body & {
          max-width: 290px;
@@ -266,7 +267,9 @@
       overflow: hidden;
       text-overflow: ellipsis;
       font-weight: 700;
+      margin-bottom: 3px;
       @media (max-width: 991.98px) {
+         margin-bottom: 0;
          .cabinet-header__body & {
             flex: 0 0 58%;
             padding-right: 30px;

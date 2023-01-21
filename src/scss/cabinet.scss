@@ -1,8 +1,12 @@
 .cabinet {
+   height: 5000px;
    background: url('@img/cabinet/top-bg.jpg') 50% 0 / cover no-repeat;
    @media (max-width: 991.98px) {
       background: url('@img/cabinet/top-bg.jpg') 100% 0 / cover no-repeat;
    }
    &__statistics {
+      margin-bottom: 30px;
+   }
+   &__calc {
    }
 }

@@ -23,7 +23,6 @@ $mainColor: #ffffff;
 // Стилі тега BODY ============================================================================================================================================================================================================================================================================================================================================================================================
 
 body {
-   line-height: 117%;
    .lock & {
       overflow: hidden;
       touch-action: none;
@@ -85,6 +84,7 @@ body {
 @import './components/cabinet-header.scss';
 @import './components/cabinet-footer.scss';
 @import './components/cabinet-statistics.scss';
+@import './components/cabinet-calc.scss';
 
 // Подключение страниц
 @import './home.scss';
