@@ -53,7 +53,7 @@ const config = {
       compress: true,
       port: 'auto',
       hot: true,
-      host: 'local-ip', // localhost
+      // host: 'local-ip', // localhost
 
       // Для слабых ПК
       // devMiddleware: {

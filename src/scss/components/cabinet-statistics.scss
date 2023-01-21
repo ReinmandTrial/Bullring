@@ -282,9 +282,56 @@
    &__copybtn {
       background: linear-gradient(180deg, #1783b0 0%, rgba(220, 103, 238, 0) 112.95%);
       border-radius: 9px;
-      padding: 9px 14px;
-      font-size: 18px;
       @extend %mainBorder;
+      width: 46px;
+      height: 40px;
+      flex: none;
+      position: relative;
+      &:active {
+         ._icon-copy {
+            transform: translate(-50%, -50%) scale(0.7);
+         }
+      }
+      & i {
+         font-size: 18px;
+         transition: all 0.3s ease 0s;
+         position: absolute;
+         top: 50%;
+         left: 50%;
+         pointer-events: none;
+      }
+      & ._icon-copy {
+         transform: translate(-50%, -50%);
+         opacity: 1;
+      }
+      & ._icon-copied {
+         opacity: 0;
+         transform: translate(-50%, -50%);
+         animation: copied 1s infinite ease-in-out;
+         transition: all 0.3s ease 0s;
+      }
+      &._copied {
+         ._icon-copy {
+            transition: all 0.3s ease 0s;
+            transform: translate(-50%, -50%);
+            opacity: 0;
+         }
+         ._icon-copied {
+            transition: all 0.3s ease 0s;
+            opacity: 1;
+         }
+      }
+   }
+   @keyframes copied {
+      0% {
+         transform: translate(-50%, -50%) rotate(0deg) scale(1.5);
+      }
+      100% {
+         transform: translate(-50%, -50%) rotate(360deg) scale(1.5);
+      }
+      0% {
+         transform: translate(-50%, -50%) rotate(0deg) scale(1.5);
+      }
    }
 
    &__dashboard-btn {
