@@ -1,4 +1,5 @@
 import { debounce } from './utility.js'
+import lottie from 'lottie-web'
 import Hammer from 'hammerjs'
 
 !(function copyRefLink() {
@@ -76,4 +77,21 @@ import Hammer from 'hammerjs'
    function setCompVal() {
       compValueEl.textContent = document.querySelector(`[data-comp-id="${curCompVal}"]`).dataset.compVal
    }
+})()
+
+!(function incomeImages() {
+   new lottie.loadAnimation({
+      container: document.querySelector('.income__img-pc'),
+      renderer: 'svg',
+      loop: true,
+      autoplay: true,
+      path: '../files/desktop_new.json',
+   })
+   new lottie.loadAnimation({
+      container: document.querySelector('.income__img-mob'),
+      renderer: 'svg',
+      loop: true,
+      autoplay: true,
+      path: '../files/mobile_new.json',
+   })
 })()
