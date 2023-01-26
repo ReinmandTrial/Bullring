@@ -6,19 +6,26 @@
       <div class="wrapper">
          @@include('components/_cabinet-header.htm',{})
          <main class="cabinet">
-            <!--CabinetStatisticsStart-->
+            <!--CabinetStatistics-->
             @@include('components/_cabinet-statistics.htm',{})
-            <!--CabinetStatisticsEnd-->
+            <!--End CabinetStatistics-->
 
-            <!--CabinetCalcStart-->
+            <!--CabinetCalc-->
             @@include('components/_cabinet-calc.htm',{})
-            <!--CabinetCalcEnd-->
+            <!--End CabinetCalc-->
 
-            <!--CabinetIncomStart-->
+            <!--CabinetIncom-->
             @@include('components/_cabinet-income.htm',{})
-            <!--CabinetIncomEnd-->
+            <!--End CabinetIncom-->
+
+            <!--CabinetIncom-->
+            @@include('components/_cabinet-active-deposits.htm',{})
+            <!--End CabinetIncom-->
          </main>
          @@include('components/_cabinet-footer.htm',{})
       </div>
+      <!--CabinetPopup-->
+      @@include('components/_cabinet-popup.htm',{})
+      <!--End CabinetPopup-->
    </body>
 </html>

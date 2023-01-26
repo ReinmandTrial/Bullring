@@ -1,9 +1,9 @@
 .cabinet {
-   height: 5000px;
-   background: url('@img/cabinet/top-bg.jpg') 50% 0 / cover no-repeat;
+   min-height: 2430px;
+   background: url('@img/cabinet/bg.jpg') 50% 0 / cover no-repeat;
    @media (max-width: 991.98px) {
-      background: url('@img/cabinet/top-bg.jpg') 100% 0 / cover no-repeat;
    }
+
    &__section {
       margin-bottom: 40px;
    }

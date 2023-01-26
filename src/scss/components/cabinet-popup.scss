@@ -1,0 +1,23 @@
+.withdrawal-small {
+   @media (max-width: 575.98px) {
+      padding: 30px 15px;
+   }
+}
+.information-popup {
+   &__percent {
+      display: block;
+      font-weight: 700;
+      font-size: 65px;
+      text-align: center;
+      @extend %textShadow;
+      color: var(--yellow);
+      @extend %mainBorder;
+      border-radius: 10px;
+      padding: 12px;
+      max-width: 270px;
+      width: 100%;
+      margin: auto;
+      margin-top: 20px;
+      word-break: break-all;
+   }
+}

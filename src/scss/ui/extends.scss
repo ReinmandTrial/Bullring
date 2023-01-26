@@ -35,7 +35,7 @@
       left: 0;
       height: 1px;
       display: block;
-      background: linear-gradient(0.25turn, rgba(225, 225, 225, 0), rgba(225, 225, 225, 0.3), rgba(225, 225, 225, 0));
+      background: linear-gradient(0.25turn, rgba(225, 225, 225, 0), rgba(225, 225, 225, 0.5), rgba(225, 225, 225, 0));
       z-index: 1;
    }
 }
@@ -50,7 +50,7 @@
       left: 0;
       height: 1px;
       display: block;
-      background: linear-gradient(0.25turn, rgba(225, 225, 225, 0), rgba(225, 225, 225, 0.3), rgba(225, 225, 225, 0));
+      background: linear-gradient(0.25turn, rgba(225, 225, 225, 0), rgba(225, 225, 225, 0.5), rgba(225, 225, 225, 0));
       z-index: 1;
    }
 }
@@ -65,10 +65,27 @@
       height: 100%;
       width: 1px;
       display: block;
-      background: linear-gradient(0.5turn, rgba(225, 225, 225, 0), rgba(225, 225, 225, 0.3), rgba(225, 225, 225, 0));
+      background: linear-gradient(0.5turn, rgba(225, 225, 225, 0), rgba(225, 225, 225, 0.5), rgba(225, 225, 225, 0));
       z-index: 1;
    }
 }
 %textShadow {
    text-shadow: 0px 0px 4px rgba(0, 0, 0, 0.04), 0px 4px 8px rgba(0, 0, 0, 0.06);
 }
+%borderTitleText {
+   font-weight: 700;
+   font-size: 85px;
+   text-transform: uppercase;
+   position: absolute;
+   left: 50%;
+   transform: translate(-50%, 0px);
+   bottom: 0;
+   color: transparent;
+   -webkit-text-stroke: 1px #1a1a1a;
+   z-index: 0;
+   opacity: 0.2;
+   @media (max-width: 767.98px) {
+      font-size: 45px;
+   }
+}
+
