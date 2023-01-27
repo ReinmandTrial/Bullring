@@ -59,6 +59,7 @@
    },
    "dependencies": {
       "hammerjs": "^2.0.8",
-      "lottie-web": "^5.10.1"
+      "lottie-web": "^5.10.1",
+      "swiper": "^8.4.6"
    }
 }

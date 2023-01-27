@@ -155,13 +155,13 @@
          transform: translate(-50%, -50%) scale(0);
          z-index: 10;
          border-radius: 50%;
-         transition: all 0.3s ease 0s;
+         transition: transform 0.3s ease 0s;
          @media (max-width: 575.98px) {
             width: 20px;
             height: 20px;
          }
          .first-step__input:checked ~ & {
-            transition: all 0.3s ease 0s;
+            transition: transform 0.3s ease 0s;
             transform: translate(-50%, -50%) scale(1);
          }
       }
@@ -173,10 +173,10 @@
       top: 0;
       left: 0;
       opacity: 0;
-      transition: all 0.3s ease 0s;
+      transition: opacity 0.3s ease 0s;
       .first-step__input:checked ~ & {
          opacity: 1;
-         transition: all 0.3s ease 0s;
+         transition: opacity 0.3s ease 0s;
       }
    }
 

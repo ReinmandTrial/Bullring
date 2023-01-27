@@ -1,9 +1,9 @@
-.withdrawal-small {
+.withdrawal-small-popup {
    @media (max-width: 575.98px) {
       padding: 30px 15px;
    }
 }
-.information-popup {
+.compounding-popup {
    &__percent {
       display: block;
       font-weight: 700;
@@ -11,7 +11,7 @@
       text-align: center;
       @extend %textShadow;
       color: var(--yellow);
-      @extend %mainBorder;
+      @extend %boxBg;
       border-radius: 10px;
       padding: 12px;
       max-width: 270px;
@@ -19,5 +19,192 @@
       margin: auto;
       margin-top: 20px;
       word-break: break-all;
+   }
+}
+.withdrawal-big-popup {
+   .popup__content {
+      padding: 0;
+   }
+   &__top {
+      padding: 30px;
+      @media (max-width: 767.98px) {
+         padding: 20px 15px;
+      }
+   }
+   &__input {
+      background: #ffffff;
+      border-radius: 10px;
+      text-align: center;
+      display: block;
+      max-width: 444px;
+      width: 100%;
+      margin: auto;
+      padding: 10px;
+      margin-bottom: 14px;
+   }
+
+   &__reinvest {
+      font-weight: 700;
+      border: 2px solid #358aba;
+      padding: 10px;
+      max-width: 180px;
+      width: 100%;
+      border-radius: 10px;
+      margin: auto;
+   }
+
+   &__bottom {
+      background: linear-gradient(180deg, #1783b0 0%, rgba(220, 103, 238, 0) 138.14%);
+      border-radius: 0 0 10px 10px;
+      padding: 20px 30px 45px;
+      @media (max-width: 767.98px) {
+         padding: 20px 15px;
+      }
+   }
+
+   &__bottom-title {
+      font-weight: 700;
+      font-size: 25px;
+      text-align: center;
+      margin-bottom: 18px;
+   }
+
+   &__wallet-number {
+      background: #ffffff;
+      border-radius: 10px;
+      color: rgba(40, 40, 40, 0.6);
+      padding: 0 10px;
+      margin: auto;
+      margin-bottom: 34px;
+      word-break: break-all;
+      display: -webkit-box;
+      -webkit-line-clamp: 1;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+      line-height: 40px;
+      max-width: 444px;
+      width: 100%;
+      text-align: center;
+      height: 40px;
+      @media (max-width: 767.98px) {
+         margin-bottom: 15px;
+      }
+   }
+
+   &__bottom-text {
+      font-size: 14px;
+      line-height: 129%;
+      opacity: 0.5;
+      text-align: center;
+      max-width: 444px;
+      margin: auto;
+   }
+}
+.reivest-popup {
+   .popup__content {
+      @media (max-width: 767.98px) {
+         overflow: hidden;
+      }
+   }
+   &__slider {
+      margin-bottom: 30px;
+      @media (max-width: 767.98px) {
+         width: auto;
+      }
+   }
+
+   &__wrapper {
+      gap: 15px;
+      display: flex;
+      flex-wrap: wrap;
+      @media (max-width: 767.98px) {
+         gap: 0;
+         flex-wrap: nowrap;
+         justify-content: start;
+      }
+   }
+
+   &__slide {
+      padding: 8px 80px 8px 10px;
+      gap: 20px;
+      flex: 0 1 305px;
+      justify-content: start;
+      @media (max-width: 767.98px) {
+         flex: none;
+      }
+      .first-step__range {
+         padding: 4px 14px;
+         span {
+            font-size: 16px;
+         }
+      }
+      .first-step__percent {
+         font-size: 40px;
+         @media (max-width: 767.98px) {
+            font-size: 35px;
+         }
+      }
+   }
+   &__pagination {
+      @media (min-width: 767.98px) {
+         display: none;
+      }
+      margin-top: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 5px;
+      .swiper-pagination-bullet {
+         display: block;
+         width: 12px;
+         height: 12px;
+         border: 1px solid #ffffff;
+         border-radius: 50%;
+         position: relative;
+         &::after {
+            content: '';
+            display: block;
+            position: absolute;
+            width: 6px;
+            height: 6px;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: #ffffff;
+            border-radius: 50%;
+            opacity: 0;
+            transition: all 0.3s ease 0s;
+         }
+      }
+      .swiper-pagination-bullet-active {
+         &::after {
+            opacity: 1;
+            transition: all 0.3s ease 0s;
+         }
+      }
+   }
+
+   &__bottom {
+   }
+
+   &__input {
+      padding: 10px;
+      background: #ffffff;
+      border-radius: 10px;
+      text-align: center;
+      max-width: 444px;
+      width: 100%;
+      display: block;
+      margin: auto;
+      margin-bottom: 20px;
+   }
+
+   &__bottom-text {
+      font-size: 14px;
+      line-height: 129%;
+      opacity: 0.5;
+      text-align: center;
+      max-width: 444px;
+      margin: auto;
    }
 }
