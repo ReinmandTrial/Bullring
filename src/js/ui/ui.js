@@ -2,7 +2,8 @@
 import * as utility from './base/utility.js'
 import './base/copy.js'
 import './base/popup.js'
-// import './base/pagination.js'
+import './base/pagination.js'
+import './base/smoothScroll.js'
 //Import Cabinet Features========================================================================================================================================================
 import './cabinet/caclStepTwo.js'
 import './cabinet/incomeImages.js'

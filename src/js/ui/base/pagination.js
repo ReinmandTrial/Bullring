@@ -1,152 +1,127 @@
-const regionaProduct = document.querySelector('.regional-list__main-content')
-if (regionaProduct) {
-   const lengthPart = 6 // количество элементов в 1 части
-   const regionalPaginationEl = document.querySelector('.regional-pagination')
-
-   let data = [...regionaProduct.children] // Тут храним все `.card`, типо аналог БД, т.е исходные данные.
-   let chunks = SplitParts(data) // Тут храним части. Ниже описание функции.
-   // countAmountUserInRegion();
-   RenderChunks(0) // Рендерим первую часть. Описание функии ниже.
-   RenderPagination() // Рендерим пагинацию. Описание тоже ниже.
-
-   document.addEventListener('selectCallback', function (e) {
-      // Селект
-      const currentSelect = e.detail.select
-      const curVal = currentSelect.value
-      if (curVal === 'ALL') {
-         chunks = SplitParts(data)
-      } else {
-         chunks = SplitParts(
-            data.filter(function (elem) {
-               return elem.classList.contains(curVal)
-            })
-         )
-      }
-
-      RenderChunks(0) // После отработки фильтра важно перерендерить части..
-      RenderPagination() // и пагинацию
+const allPaginations = document.querySelectorAll('[data-pagination]')
+allPaginations.length &&
+   allPaginations.forEach((pagination) => {
+      initPagination(pagination)
    })
 
-   // Функция которая делит массив на части.
-   function SplitParts(arr) {
-      // передаём массив, который нужно разбить
-      if (arr.length > lengthPart) {
-         // проверяем, имеет ли переданный массив длину больше, чем длина части
-         const _chunks = [],
-            // подготавливаем возращаемый массив с частями
-            parts = Math.floor(arr.length / lengthPart) // сколько частей получится
+function initPagination(block) {
+   const dataList = block.querySelector('[data-pagination-list]')
+   const nav = block.querySelector('[data-pagination-nav]')
+   const navList = block.querySelector('[data-pagination-nav-list]')
+   const lengthPart = 5
+   let activePart = 0
 
-         for (var i = 0; i < arr.length; i += lengthPart) {
-            // проходим по массиву, шаг длине части
-            _chunks.push(arr.slice(i, i + lengthPart))
-         } // добавляем часть в массив с частями
-
-         return _chunks // возвращаем массив
-      } else return [arr] // если получаемый массив меньше длины части, то возвращаем его же.
+   const CLASS = {
+      ITEM: 'paginations__item',
+      ARROW: 'paginations__arrow',
+      ACTIVE: '_active',
+      HIDE: '_hide',
    }
-
-   // Функция для вывода конкретно части в HTML
-   function RenderChunks(part) {
-      // передаём порядковый номер части
-      if (part >= 0 && part < chunks.length) {
-         // если номер части > 0 и < длины частей
-         regionaProduct.innerHTML = '' // очищаем элемент, куда будем выводить части
-
-         chunks[part].map(function (elem) {
-            return regionaProduct.append(elem)
-         }) // Выводим т.к. в исходном массиве уже сразу Element, то мы можем добавить его через .append
-      } else return false
+   const SELECTOR = {
+      ACTIVE_ITEM: '.paginations__item._active',
+      PAG_PART: 'data-pag-part',
    }
+   const ATTR = {
+      PAG_PART: 'data-pag-part',
+      PAG_PREV: 'data-pag-prev',
+   }
+   const EL = {
+      ARROW_FIRST: nav.querySelector('[data-pag-first]'),
+      ARROW_PREV: nav.querySelector('[data-pag-prev]'),
+      ARROW_NEXT: nav.querySelector('[data-pag-next]'),
+      ARROW_LAST: nav.querySelector('[data-pag-last]'),
+      ACTIVE_ITEM: nav.querySelector('.paginations__item._active'),
+   }
+   let data = [...dataList.children]
+   let chunks = SplitParts(data, lengthPart)
 
-   // Механика работы пагинации
-   regionalPaginationEl.addEventListener('click', (e) => {
+   RenderChunks(0)
+   RenderPagination()
+
+   //========================================================================================================================================================
+   nav.addEventListener('click', (e) => {
       e.preventDefault()
       let item = e.target
-      if (item.classList.contains('regional-pagination__item') || item.classList.contains('regional-pagination__arrow')) {
-         let active = regionalPaginationEl.querySelector('.regional-pagination__item._active') // получим активную страницу
-         let part // сюда запишем номер части, для проверок пагинации
-         if (item.classList.contains('regional-pagination__arrow')) {
-            // если нажата кнопка "вперёд" или "назад"
-            if (item.classList.contains('_disable')) return false // Если кнопка имеет класс `_disable`, то прекращаем выполнение кода ниже
-            part = +active.dataset.part // записываем номер части активной страницы.
-            part = item.classList.contains('regional-pagination__arrow_prev') ? part - 1 : part + 1 // Если нажата кнопка "назад", то отнимаем единицу активной старница, если "вперёд", то прибавляем.
-            RenderChunks(part) // Рендерим страница
-            // Меняем в пагинации активную страницу
-            active.classList.remove('_active') // Находим активную и удаляем класс `active`
-            regionalPaginationEl.querySelector(`.regional-pagination__item[data-part="${part}"]`).classList.add('_active') // находим страницу с `data-part`, который равен активной странице и добавляем ему класс `active`
-         } else {
-            // Если нажаты кнопки страницы (1, 2, 3 и т.п.)
-            active.classList.remove('_active') // удаляем класс `active` у активной.
-            item.classList.add('_active') // добавляем нажатой кнопке класс `active`
-            part = +item.dataset.part // получаем её номер части
-            RenderChunks(part) // Рендерим страницу.
-         }
-         // Тут запрещаем или разрешаем использовать кнопки "вперёд" или "назад", в зависимости от того, какая часть сейчас активна.
-         let prev = regionalPaginationEl.querySelector('.regional-pagination__arrow_prev')
-         let next = regionalPaginationEl.querySelector('.regional-pagination__arrow_next')
-
-         // Сначала удалим у них класс `_disable`, если он есть
-         if (prev.classList.contains('_disable')) prev.classList.remove('_disable')
-         if (next.classList.contains('_disable')) next.classList.remove('_disable')
-         if (part === 0) prev.classList.add('_disable') // Проверим является ли активная страница началом частей, если да, то запретим использовать кнопку "назад"
-         if (part === chunks.length - 1) next.classList.add('_disable') // если активная является концом частей, то запрещаем "вперёд".
-         hideOverPages()
-      }
+      if (item.classList.contains(CLASS.ITEM)) onItemClick(item)
+      if (item.classList.contains(CLASS.ARROW)) onArrowsClick(item)
+      disableUnnecessaryArrows()
+      hideOverPages()
    })
-
+   //========================================================================================================================================================
+   function SplitParts(arr) {
+      if (arr.length > lengthPart) {
+         const _chunks = []
+         for (let i = 0; i < arr.length; i += lengthPart) {
+            _chunks.push(arr.slice(i, i + lengthPart))
+         }
+         return _chunks
+      } else return [arr]
+   }
+   function RenderChunks(part) {
+      if (part >= 0 && part < chunks.length) {
+         dataList.innerHTML = ''
+         chunks[part].map((elem) => {
+            return dataList.append(elem)
+         })
+      } else return false
+   }
    function RenderPagination() {
-      regionalPaginationEl.innerHTML = ''
+      if (chunks.length === 1) nav.style.display = 'none'
       if (chunks.length > 1) {
-         regionalPaginationEl.innerHTML = '<div class="regional-pagination__list"></div>'
-         const regionalPaginationList = document.querySelector('.regional-pagination__list')
-         // Добавляем кнопки
+         nav.style.display = 'flex'
          chunks.map((e, i) =>
-            regionalPaginationList.insertAdjacentHTML(
+            navList.insertAdjacentHTML(
                'beforeend',
-               `<button class="regional-pagination__item ${i === 0 ? '_active' : ''}" data-part="${i}">${i + 1}</button>`
+               ` <li 
+                      data-goto="#activeDepositsList"  
+                      data-goto-top="250" 
+                      class="paginations__item  ${i === 0 ? '_active' : ''}" 
+                      data-pag-part="${i}" >
+                         ${i + 1}
+                   </li>`
             )
-         )
-
-         // Добавляем кнопки "вперёд" и "назад"
-         regionalPaginationEl.insertAdjacentHTML(
-            'afterbegin',
-            '<button type="button"  class="regional-pagination__arrow regional-pagination__arrow_prev _icon-arrow-bottom _disable"></button>'
-         ) // Т.к. данная функция создаёт пагинацию у которой первая страница активна, то сразу запрещаем кнопке "назад" работать.
-         regionalPaginationEl.insertAdjacentHTML(
-            'beforeend',
-            '<button type="button" class="regional-pagination__arrow regional-pagination__arrow_next _icon-arrow-bottom"></button>'
          )
       }
       hideOverPages()
+      disableUnnecessaryArrows()
    }
    function hideOverPages() {
-      const regionalPaginationList = document.querySelector('.regional-pagination__list')
-      const active = regionalPaginationEl.querySelector('.regional-pagination__item._active') // получим активную страницу
-      if (regionalPaginationList) {
-         let items = [...regionalPaginationList.children]
+      const active = navList.querySelector(SELECTOR.ACTIVE_ITEM)
+      if (navList) {
+         let items = [...navList.children]
          if (items.length > 5) {
-            items.forEach((item) => item.classList.add('_hide'))
-            items[0].classList.remove('_hide')
+            items.forEach((item) => item.classList.add(CLASS.HIDE))
+            items[0].classList.remove(CLASS.HIDE)
             if (active.previousElementSibling) {
-               active.previousElementSibling.classList.remove('_hide')
+               active.previousElementSibling.classList.remove(CLASS.HIDE)
             }
-            active.classList.remove('_hide')
+            active.classList.remove(CLASS.HIDE)
             if (active.nextElementSibling) {
-               active.nextElementSibling.classList.remove('_hide')
+               active.nextElementSibling.classList.remove(CLASS.HIDE)
             }
-            items[items.length - 1].classList.remove('_hide')
+            items[items.length - 1].classList.remove(CLASS.HIDE)
          }
       }
    }
-
-   // function countAmountUserInRegion() {
-   //    const regionSelectList = document.querySelectorAll('.select__option');
-   //    regionSelectList.forEach((reg) => {
-   //       const curVal = data.filter((el) => {
-   //          if (reg.dataset.value === 'ALL') return data.length;
-   //          return reg.dataset.value === el.classList[2];
-   //       });
-   //       reg.insertAdjacentHTML('beforeend', `<span>(${curVal.length})</span>`);
-   //    });
-   // }
+   function onArrowsClick(item) {
+      if (item.classList.contains(CLASS.DISABLE)) return false
+      const active = navList.querySelector(SELECTOR.ACTIVE_ITEM)
+      activePart = item.hasAttribute(ATTR.PAG_PREV) ? activePart - 1 : activePart + 1
+      active.classList.remove(CLASS.ACTIVE)
+      navList.querySelector(`[${ATTR.PAG_PART} = '${activePart}']`).classList.add(CLASS.ACTIVE)
+      RenderChunks(activePart)
+   }
+   function onItemClick(item) {
+      const active = navList.querySelector(SELECTOR.ACTIVE_ITEM)
+      active.classList.remove(CLASS.ACTIVE)
+      item.classList.add(CLASS.ACTIVE)
+      activePart = +item.dataset.pagPart
+      RenderChunks(activePart)
+   }
+   function disableUnnecessaryArrows() {
+      if (EL.ARROW_PREV.hasAttribute('disabled')) EL.ARROW_PREV.removeAttribute('disabled')
+      if (EL.ARROW_NEXT.hasAttribute('disabled')) EL.ARROW_NEXT.removeAttribute('disabled')
+      if (activePart === 0) EL.ARROW_PREV.setAttribute('disabled', true)
+      if (activePart === chunks.length - 1) EL.ARROW_NEXT.setAttribute('disabled', true)
+   }
 }

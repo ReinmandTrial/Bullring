@@ -2,7 +2,7 @@ import Swiper, { Pagination } from 'swiper'
 import { openPopup, closePopup } from '../base/popup.js'
 
 //ReivestSlider========================================================================================================================================================
-new Swiper('.reivest-popup__slider', {
+export const reinvesSlider = new Swiper('.reivest-popup__slider', {
    modules: [Pagination],
    speed: 800,
    grabCursor: true,
@@ -28,10 +28,12 @@ new Swiper('.reivest-popup__slider', {
       el: '.reivest-popup__pagination',
    },
 })
+reinvesSlider.disable()
 //SwichPopup========================================================================================================================================================
 const makeReinveBtn = document.querySelector('.withdrawal-big-popup__reinvest')
 makeReinveBtn &&
    makeReinveBtn.addEventListener('click', () => {
-      closePopup()
+      closePopup('withoutUnlock')
       openPopup('reinvestPopup')
+      reinvesSlider.enable()
    })

@@ -1,4 +1,5 @@
 import { bodyUnlock, bodyLock } from '../base/utility.js'
+import { reinvesSlider } from '../cabinet/cabinetPopups.js'
 const allPopupsBtn = document.querySelectorAll('[data-popup]')
 const allPopups = document.querySelectorAll('.popup')
 
@@ -12,18 +13,23 @@ if (allPopups.length) {
    })
 }
 export function runOpen(btn) {
+   if (btn.dataset.popup === 'reinvestPopup') {
+      reinvesSlider.enable()
+   }
    openPopup(btn.dataset.popup)
-   bodyLock()
 }
 export function runClose(el) {
    if (isHasClass(el.target, 'popup__close-btn', 'popup', 'popup__body', 'popup-buttons__cancel')) {
       closePopup()
+      reinvesSlider.disable()
    }
 }
 export function openPopup(id) {
    document.getElementById(id).classList.add('_popup-open')
+   bodyLock()
 }
-export function closePopup() {
+export function closePopup(mode) {
+   if (mode) return allPopups.forEach((popup) => popup.classList.remove('_popup-open'))
    allPopups.forEach((popup) => popup.classList.remove('_popup-open'))
    bodyUnlock()
 }
