@@ -322,17 +322,6 @@
          }
       }
    }
-   @keyframes copied {
-      0% {
-         transform: translate(-50%, -50%) rotate(0deg) scale(1.5);
-      }
-      100% {
-         transform: translate(-50%, -50%) rotate(360deg) scale(1.5);
-      }
-      0% {
-         transform: translate(-50%, -50%) rotate(0deg) scale(1.5);
-      }
-   }
 
    &__dashboard-btn {
       flex: 0 0 calc(50% - 7px);

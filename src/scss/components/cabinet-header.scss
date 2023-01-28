@@ -138,6 +138,7 @@
          white-space: nowrap;
       }
       & i {
+         pointer-events: none;
          font-size: 20px;
       }
 
@@ -159,7 +160,7 @@
          }
       }
       //ActiveState++++++++++++++++++
-      &._active {
+      &._active-nav {
          i {
             background-image: linear-gradient(207.09deg, #1783b0 16.92%, #dc67ee 99.75%);
             background-clip: text;

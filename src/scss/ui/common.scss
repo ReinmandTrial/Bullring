@@ -131,3 +131,15 @@
       border: 2px solid rgba(53, 138, 186, 1);
    }
 }
+//Animation========================================================================================================================================================
+@keyframes copied {
+   0% {
+      transform: translate(-50%, -50%) rotate(0deg) scale(1.5);
+   }
+   100% {
+      transform: translate(-50%, -50%) rotate(360deg) scale(1.5);
+   }
+   0% {
+      transform: translate(-50%, -50%) rotate(0deg) scale(1.5);
+   }
+}

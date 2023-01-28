@@ -1,7 +1,13 @@
 .cabinet {
-   min-height: 2430px;
+   height: 3500px;
    background: url('@img/cabinet/bg.jpg') 50% 0 / cover no-repeat;
    @media (max-width: 991.98px) {
+   }
+   &__page {
+      display: none;
+      &._active-body {
+         display: block;
+      }
    }
 
    &__section {

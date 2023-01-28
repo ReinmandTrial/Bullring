@@ -3,12 +3,23 @@
    justify-content: center;
    align-items: center;
    gap: 15px;
-   margin-top: 30px;
+   margin: 30px -15px 0px -15px;
    &__arrow {
       font-size: 20px;
       color: #9e9ea8;
+      transition: all 0.3s ease 0s;
       &:disabled {
          opacity: 0.3;
+      }
+      @media (any-hover: hover) {
+         &:hover {
+            transform: scale(1.2);
+            transition: all 0.3s ease 0s;
+         }
+      }
+      &:active {
+         transition: all 0.3s ease 0s;
+         transform: scale(0.8);
       }
    }
 
@@ -17,6 +28,11 @@
       align-items: center;
       justify-content: center;
       gap: 15px;
+      width: 300px;
+      @media (max-width: 575.98px) {
+         gap: 0px;
+         width: 210px;
+      }
    }
 
    &__item {
@@ -29,6 +45,17 @@
       justify-content: center;
       font-weight: 600;
       cursor: pointer;
+      transition: all 0.3s ease 0s;
+      @media (any-hover: hover) {
+         &:hover {
+            border: 1px solid #1783b0;
+            transition: all 0.3s ease 0s;
+         }
+      }
+      &:active {
+         transition: all 0.3s ease 0s;
+         transform: scale(0.8);
+      }
       &._active {
          background: linear-gradient(207.09deg, #1783b0 16.92%, #dc67ee 99.75%);
          color: var(--white);

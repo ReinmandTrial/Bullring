@@ -3,11 +3,17 @@
       <div class="cabinet-header__content">
          <div class="cabinet-header__body">
             <nav class="cabinet-header__menu cabinet-menu">
-               <button type="button" class="cabinet-menu__item _active">
+               <button
+                  data-nav-cabinet-btn="1"
+                  data-goto-top="20"
+                  data-goto="#cabinetHome"
+                  type="button"
+                  class="cabinet-menu__item _active-nav"
+               >
                   <i class="_icon-home"></i>
                   <span>Home</span>
                </button>
-               <button type="button" class="cabinet-menu__item">
+               <button data-nav-cabinet-btn="2" data-goto-top="20" data-goto="#cabinetPartners" type="button" class="cabinet-menu__item">
                   <i class="_icon-partners"></i>
                   <span>My Partners</span>
                </button>

@@ -2297,25 +2297,9 @@
                </div>
             </div>
          </div>
-         <div data-pagination-nav class="active-list__paginations paginations">
-            <!-- <button data-pag-first type="button" class="paginations__arrow _icon-arrow-left-last"></button> -->
-            <button
-               data-goto="#activeDepositsList"
-               data-goto-top="250"
-               data-pag-prev
-               type="button"
-               class="paginations__arrow _icon-arrow-left"
-            ></button>
-            <ul data-pagination-nav-list class="paginations__list"></ul>
-            <button
-               data-goto="#activeDepositsList"
-               data-goto-top="250"
-               data-pag-next
-               type="button"
-               class="paginations__arrow _icon-arrow-right"
-            ></button>
-            <!-- <button data-pag-last type="button" class="paginations__arrow _icon-arrow-right-last"></button> -->
-         </div>
+         <!--CabinetPagination-->
+         @@include('./_cabinet-pagination.htm',{})
+         <!--End CabinetPagination-->
       </div>
    </div>
 </section>

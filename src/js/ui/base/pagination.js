@@ -19,18 +19,15 @@ function initPagination(block) {
    }
    const SELECTOR = {
       ACTIVE_ITEM: '.paginations__item._active',
-      PAG_PART: 'data-pag-part',
    }
    const ATTR = {
       PAG_PART: 'data-pag-part',
       PAG_PREV: 'data-pag-prev',
+      PAG_NEXT: 'data-pag-next',
    }
    const EL = {
-      ARROW_FIRST: nav.querySelector('[data-pag-first]'),
-      ARROW_PREV: nav.querySelector('[data-pag-prev]'),
-      ARROW_NEXT: nav.querySelector('[data-pag-next]'),
-      ARROW_LAST: nav.querySelector('[data-pag-last]'),
-      ACTIVE_ITEM: nav.querySelector('.paginations__item._active'),
+      ARROW_PREV: null,
+      ARROW_NEXT: null,
    }
    let data = [...dataList.children]
    let chunks = SplitParts(data, lengthPart)
@@ -66,7 +63,6 @@ function initPagination(block) {
       } else return false
    }
    function RenderPagination() {
-      if (chunks.length === 1) nav.style.display = 'none'
       if (chunks.length > 1) {
          nav.style.display = 'flex'
          chunks.map((e, i) =>
@@ -81,6 +77,7 @@ function initPagination(block) {
                    </li>`
             )
          )
+         renderArrow()
       }
       hideOverPages()
       disableUnnecessaryArrows()
@@ -104,7 +101,6 @@ function initPagination(block) {
       }
    }
    function onArrowsClick(item) {
-      if (item.classList.contains(CLASS.DISABLE)) return false
       const active = navList.querySelector(SELECTOR.ACTIVE_ITEM)
       activePart = item.hasAttribute(ATTR.PAG_PREV) ? activePart - 1 : activePart + 1
       active.classList.remove(CLASS.ACTIVE)
@@ -123,5 +119,29 @@ function initPagination(block) {
       if (EL.ARROW_NEXT.hasAttribute('disabled')) EL.ARROW_NEXT.removeAttribute('disabled')
       if (activePart === 0) EL.ARROW_PREV.setAttribute('disabled', true)
       if (activePart === chunks.length - 1) EL.ARROW_NEXT.setAttribute('disabled', true)
+   }
+   function renderArrow() {
+      nav.insertAdjacentHTML(
+         'afterbegin',
+         `<button
+            data-goto="#activeDepositsList"
+            data-goto-top="230"
+            data-pag-prev
+            type="button"
+            class="paginations__arrow _icon-arrow-left">
+         </button>`
+      )
+      nav.insertAdjacentHTML(
+         'beforeend',
+         `<button
+            data-goto="#activeDepositsList"
+            data-goto-top="230"
+            data-pag-next
+            type="button"
+            class="paginations__arrow _icon-arrow-right">
+         </button>`
+      )
+      EL.ARROW_PREV = block.querySelector(`[${ATTR.PAG_PREV}]`)
+      EL.ARROW_NEXT = block.querySelector(`[${ATTR.PAG_NEXT}]`)
    }
 }
