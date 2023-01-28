@@ -53,6 +53,7 @@ body {
          left: 0;
          background: linear-gradient(180deg, rgba(13, 63, 63, 0.4) 0%, rgba(0, 0, 0, 0) 100%);
          backdrop-filter: blur(24.5px);
+         -webkit-backdrop-filter: blur(24.5px);
          z-index: 100;
          .menu-open & {
             display: block;
@@ -88,7 +89,7 @@ body {
 @import './components/cabinet-income.scss';
 @import './components/cabinet-active-deposits.scss';
 @import './components/cabinet-refer-bonus.scss';
-@import './components/cabinet-statistics.scss';
+@import './components/cabinet-refer-statistics.scss';
 @import './components/cabinet-refer-history.scss';
 @import './components/cabinet-popup.scss';
 @import './components/cabinet-pagination.scss';

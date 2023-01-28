@@ -10,7 +10,6 @@ function initPagination(block) {
    const navList = block.querySelector('[data-pagination-nav-list]')
    const lengthPart = 5
    let activePart = 0
-
    const CLASS = {
       ITEM: 'paginations__item',
       ARROW: 'paginations__arrow',
@@ -65,22 +64,21 @@ function initPagination(block) {
    function RenderPagination() {
       if (chunks.length > 1) {
          nav.style.display = 'flex'
-         chunks.map((e, i) =>
+         chunks.map((e, i) => {
             navList.insertAdjacentHTML(
                'beforeend',
-               ` <li 
-                      data-goto="#activeDepositsList"  
-                      data-goto-top="250" 
-                      class="paginations__item  ${i === 0 ? '_active' : ''}" 
+               ` <li
+                      data-goto=[data-pagination='${block.dataset.pagination}']
+                      class="paginations__item  ${i === 0 ? '_active' : ''}"
                       data-pag-part="${i}" >
                          ${i + 1}
                    </li>`
             )
-         )
+         })
          renderArrow()
+         hideOverPages()
+         disableUnnecessaryArrows()
       }
-      hideOverPages()
-      disableUnnecessaryArrows()
    }
    function hideOverPages() {
       const active = navList.querySelector(SELECTOR.ACTIVE_ITEM)
@@ -124,8 +122,7 @@ function initPagination(block) {
       nav.insertAdjacentHTML(
          'afterbegin',
          `<button
-            data-goto="#activeDepositsList"
-            data-goto-top="230"
+             data-goto=[data-pagination='${block.dataset.pagination}']
             data-pag-prev
             type="button"
             class="paginations__arrow _icon-arrow-left">
@@ -134,8 +131,7 @@ function initPagination(block) {
       nav.insertAdjacentHTML(
          'beforeend',
          `<button
-            data-goto="#activeDepositsList"
-            data-goto-top="230"
+             data-goto=[data-pagination='${block.dataset.pagination}']
             data-pag-next
             type="button"
             class="paginations__arrow _icon-arrow-right">

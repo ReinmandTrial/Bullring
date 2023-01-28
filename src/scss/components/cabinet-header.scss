@@ -61,7 +61,6 @@
          transform: scale(0);
          opacity: 0;
          visibility: hidden;
-         transition: all 0.3s ease 0s;
          .menu-open & {
             visibility: visible;
             opacity: 1;

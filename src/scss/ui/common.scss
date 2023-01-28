@@ -31,6 +31,12 @@
       }
    }
 }
+//Icon========================================================================================================================================================
+._icon-busd,
+._icon-bnb {
+   font-size: 32px;
+   color: var(--yellow);
+}
 //Popup========================================================================================================================================================
 .popup {
    position: fixed;
@@ -141,5 +147,38 @@
    }
    0% {
       transform: translate(-50%, -50%) rotate(0deg) scale(1.5);
+   }
+}
+//TitleText========================================================================================================================================================
+.border-title-text {
+   position: relative;
+   text-align: center;
+   span {
+      &:first-child {
+         font-weight: 700;
+         font-size: 45px;
+         text-align: center;
+         @media (max-width: 767.98px) {
+            font-size: 22px;
+         }
+      }
+      &:last-child {
+         font-weight: 700;
+         font-size: 85px;
+         text-transform: uppercase;
+         position: absolute;
+         left: 50%;
+         transform: translate(-50%, 0px);
+         top: -40px;
+         color: transparent;
+         -webkit-text-stroke: 1px #1a1a1a;
+         z-index: 0;
+         opacity: 0.2;
+         width: 100%;
+         @media (max-width: 767.98px) {
+            font-size: 45px;
+            top: -20px;
+         }
+      }
    }
 }

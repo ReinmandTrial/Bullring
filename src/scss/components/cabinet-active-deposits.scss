@@ -23,23 +23,15 @@
       gap: 15px;
    }
    &__title {
-      position: relative;
       @media (max-width: 1200px) {
          order: 1;
          flex: 0 0 calc(85% - 15px);
       }
+      text-align: left;
       span {
-         &:first-child {
-            font-weight: 700;
-            font-size: 45px;
-            @media (max-width: 767.98px) {
-               font-size: 22px;
-            }
-         }
          &:last-child {
             left: 0;
             transform: translate(0px, 0px);
-            @extend %borderTitleText;
          }
       }
    }
@@ -265,11 +257,6 @@
             text-fill-color: transparent;
          }
       }
-   }
-   & ._icon-bnb,
-   & ._icon-busd {
-      color: var(--yellow);
-      font-size: 32px;
    }
    @media (max-width: 1200px) {
       display: flex;

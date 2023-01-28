@@ -4,7 +4,7 @@ import { openPopup, closePopup } from '../base/popup.js'
 //ReivestSlider========================================================================================================================================================
 export const reinvesSlider = new Swiper('.reivest-popup__slider', {
    modules: [Pagination],
-   speed: 800,
+   speed: 300,
    grabCursor: true,
    watchOverflow: true,
    slidesPerView: 5,
