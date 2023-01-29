@@ -1,4 +1,6 @@
 import lottie from 'lottie-web'
+import incomePcJson from '../../../files/incomDesctop.json'
+import incomeMobJson from '../../../files/incomMobile.json'
 
 !(function incomeImages() {
    new lottie.loadAnimation({
@@ -6,13 +8,13 @@ import lottie from 'lottie-web'
       renderer: 'svg',
       loop: true,
       autoplay: true,
-      path: '../files/desktop_new.json',
+      animationData: incomePcJson,
    })
    new lottie.loadAnimation({
       container: document.querySelector('.income__img-mob'),
       renderer: 'svg',
       loop: true,
       autoplay: true,
-      path: '../files/mobile_new.json',
+      animationData: incomeMobJson,
    })
 })()
