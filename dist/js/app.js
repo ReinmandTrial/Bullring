@@ -2803,6 +2803,9 @@
                     this.playDirection = val < 0 ? -1 : 1;
                     this.updaFrameModifier();
                 };
+                AnimationItem.prototype.setLoop = function(isLooping) {
+                    this.loop = isLooping;
+                };
                 AnimationItem.prototype.setVolume = function(val, name) {
                     if (name && this.name !== name) return;
                     this.audioController.setVolume(val);
@@ -4841,7 +4844,7 @@
                 lottie.useWebWorker = setWebWorker;
                 lottie.setIDPrefix = setPrefix;
                 lottie.__getFactory = getFactory;
-                lottie.version = "5.10.1";
+                lottie.version = "5.10.2";
                 function checkReady() {
                     if ("complete" === document.readyState) {
                         clearInterval(readyStateCheckInterval);
@@ -6962,6 +6965,12 @@
                         this.globalData.projectInterface.registerComposition(comp);
                     }
                 };
+                BaseRenderer.prototype.getElementById = function(ind) {
+                    var i;
+                    var len = this.elements.length;
+                    for (i = 0; i < len; i += 1) if (this.elements[i].data.ind === ind) return this.elements[i];
+                    return null;
+                };
                 BaseRenderer.prototype.getElementByPath = function(path) {
                     var pathValue = path.shift();
                     var element;
@@ -7255,9 +7264,12 @@
                 }();
                 var featureSupport = function() {
                     var ob = {
-                        maskType: true
+                        maskType: true,
+                        svgLumaHidden: true,
+                        offscreenCanvas: "undefined" !== typeof OffscreenCanvas
                     };
                     if (/MSIE 10/i.test(navigator.userAgent) || /MSIE 9/i.test(navigator.userAgent) || /rv:11.0/i.test(navigator.userAgent) || /Edge\/\d./i.test(navigator.userAgent)) ob.maskType = false;
+                    if (/firefox/i.test(navigator.userAgent)) ob.svgLumaHidden = false;
                     return ob;
                 }();
                 var registeredEffects = {};
@@ -7360,6 +7372,7 @@
                         this.renderableEffectsManager = new SVGEffects(this);
                     },
                     getMatte: function getMatte(matteType) {
+                        if (!this.matteMasks) this.matteMasks = {};
                         if (!this.matteMasks[matteType]) {
                             var id = this.layerId + "_" + matteType;
                             var filId;
@@ -9882,6 +9895,45 @@
                     this.cTr.reset();
                     this.cO = 1;
                 };
+                CVContextData.prototype.popTransform = function() {
+                    var popped = this.saved[this.cArrPos];
+                    var i;
+                    var arr = this.cTr.props;
+                    for (i = 0; i < 16; i += 1) arr[i] = popped[i];
+                    return popped;
+                };
+                CVContextData.prototype.popOpacity = function() {
+                    var popped = this.savedOp[this.cArrPos];
+                    this.cO = popped;
+                    return popped;
+                };
+                CVContextData.prototype.pop = function() {
+                    this.cArrPos -= 1;
+                    var transform = this.popTransform();
+                    var opacity = this.popOpacity();
+                    return {
+                        transform,
+                        opacity
+                    };
+                };
+                CVContextData.prototype.push = function() {
+                    var props = this.cTr.props;
+                    if (this._length <= this.cArrPos) this.duplicate();
+                    var i;
+                    var arr = this.saved[this.cArrPos];
+                    for (i = 0; i < 16; i += 1) arr[i] = props[i];
+                    this.savedOp[this.cArrPos] = this.cO;
+                    this.cArrPos += 1;
+                };
+                CVContextData.prototype.getTransform = function() {
+                    return this.cTr;
+                };
+                CVContextData.prototype.getOpacity = function() {
+                    return this.cO;
+                };
+                CVContextData.prototype.setOpacity = function(value) {
+                    this.cO = value;
+                };
                 function ShapeTransformManager() {
                     this.sequences = {};
                     this.sequenceList = [];
@@ -9936,6 +9988,62 @@
                         return "_" + this.transform_key_count;
                     }
                 };
+                var lumaLoader = function lumaLoader() {
+                    var id = "__lottie_element_luma_buffer";
+                    var lumaBuffer = null;
+                    var lumaBufferCtx = null;
+                    var svg = null;
+                    function createLumaSvgFilter() {
+                        var _svg = createNS("svg");
+                        var fil = createNS("filter");
+                        var matrix = createNS("feColorMatrix");
+                        fil.setAttribute("id", id);
+                        matrix.setAttribute("type", "matrix");
+                        matrix.setAttribute("color-interpolation-filters", "sRGB");
+                        matrix.setAttribute("values", "0.3, 0.3, 0.3, 0, 0, 0.3, 0.3, 0.3, 0, 0, 0.3, 0.3, 0.3, 0, 0, 0.3, 0.3, 0.3, 0, 0");
+                        fil.appendChild(matrix);
+                        _svg.appendChild(fil);
+                        _svg.setAttribute("id", id + "_svg");
+                        if (featureSupport.svgLumaHidden) _svg.style.display = "none";
+                        return _svg;
+                    }
+                    function loadLuma() {
+                        if (!lumaBuffer) {
+                            svg = createLumaSvgFilter();
+                            document.body.appendChild(svg);
+                            lumaBuffer = createTag("canvas");
+                            lumaBufferCtx = lumaBuffer.getContext("2d");
+                            lumaBufferCtx.filter = "url(#" + id + ")";
+                            lumaBufferCtx.fillStyle = "rgba(0,0,0,0)";
+                            lumaBufferCtx.fillRect(0, 0, 1, 1);
+                        }
+                    }
+                    function getLuma(canvas) {
+                        if (!lumaBuffer) loadLuma();
+                        lumaBuffer.width = canvas.width;
+                        lumaBuffer.height = canvas.height;
+                        lumaBufferCtx.filter = "url(#" + id + ")";
+                        return lumaBuffer;
+                    }
+                    return {
+                        load: loadLuma,
+                        get: getLuma
+                    };
+                };
+                function createCanvas(width, height) {
+                    if (featureSupport.offscreenCanvas) return new OffscreenCanvas(width, height);
+                    var canvas = createTag("canvas");
+                    canvas.width = width;
+                    canvas.height = height;
+                    return canvas;
+                }
+                var assetLoader = function() {
+                    return {
+                        loadLumaCanvas: lumaLoader.load,
+                        getLumaCanvas: lumaLoader.get,
+                        createCanvas
+                    };
+                }();
                 function CVEffects() {}
                 CVEffects.prototype.renderFrame = function() {};
                 function CVMaskElement(data, element) {
@@ -9991,11 +10099,27 @@
                     this.element = null;
                 };
                 function CVBaseElement() {}
+                var operationsMap = {
+                    1: "source-in",
+                    2: "source-out",
+                    3: "source-in",
+                    4: "source-out"
+                };
                 CVBaseElement.prototype = {
                     createElements: function createElements() {},
                     initRendererElement: function initRendererElement() {},
                     createContainerElements: function createContainerElements() {
+                        if (this.data.tt >= 1) {
+                            this.buffers = [];
+                            var canvasContext = this.globalData.canvasContext;
+                            var bufferCanvas = assetLoader.createCanvas(canvasContext.canvas.width, canvasContext.canvas.height);
+                            this.buffers.push(bufferCanvas);
+                            var bufferCanvas2 = assetLoader.createCanvas(canvasContext.canvas.width, canvasContext.canvas.height);
+                            this.buffers.push(bufferCanvas2);
+                            if (this.data.tt >= 3 && !document._isProxy) assetLoader.loadLumaCanvas();
+                        }
                         this.canvasContext = this.globalData.canvasContext;
+                        this.transformCanvas = this.globalData.transformCanvas;
                         this.renderableEffectsManager = new CVEffects(this);
                     },
                     createContent: function createContent() {},
@@ -10020,17 +10144,62 @@
                             this.maskManager._isFirstFrame = true;
                         }
                     },
-                    renderFrame: function renderFrame() {
+                    clearCanvas: function clearCanvas(canvasContext) {
+                        canvasContext.clearRect(this.transformCanvas.tx, this.transformCanvas.ty, this.transformCanvas.w * this.transformCanvas.sx, this.transformCanvas.h * this.transformCanvas.sy);
+                    },
+                    prepareLayer: function prepareLayer() {
+                        if (this.data.tt >= 1) {
+                            var buffer = this.buffers[0];
+                            var bufferCtx = buffer.getContext("2d");
+                            this.clearCanvas(bufferCtx);
+                            bufferCtx.drawImage(this.canvasContext.canvas, 0, 0);
+                            this.currentTransform = this.canvasContext.getTransform();
+                            this.canvasContext.setTransform(1, 0, 0, 1, 0, 0);
+                            this.clearCanvas(this.canvasContext);
+                            this.canvasContext.setTransform(this.currentTransform);
+                        }
+                    },
+                    exitLayer: function exitLayer() {
+                        if (this.data.tt >= 1) {
+                            var buffer = this.buffers[1];
+                            var bufferCtx = buffer.getContext("2d");
+                            this.clearCanvas(bufferCtx);
+                            bufferCtx.drawImage(this.canvasContext.canvas, 0, 0);
+                            this.canvasContext.setTransform(1, 0, 0, 1, 0, 0);
+                            this.clearCanvas(this.canvasContext);
+                            this.canvasContext.setTransform(this.currentTransform);
+                            var mask = this.comp.getElementById("tp" in this.data ? this.data.tp : this.data.ind - 1);
+                            mask.renderFrame(true);
+                            this.canvasContext.setTransform(1, 0, 0, 1, 0, 0);
+                            if (this.data.tt >= 3 && !document._isProxy) {
+                                var lumaBuffer = assetLoader.getLumaCanvas(this.canvasContext.canvas);
+                                var lumaBufferCtx = lumaBuffer.getContext("2d");
+                                lumaBufferCtx.drawImage(this.canvasContext.canvas, 0, 0);
+                                this.clearCanvas(this.canvasContext);
+                                this.canvasContext.drawImage(lumaBuffer, 0, 0);
+                            }
+                            this.canvasContext.globalCompositeOperation = operationsMap[this.data.tt];
+                            this.canvasContext.drawImage(buffer, 0, 0);
+                            this.canvasContext.globalCompositeOperation = "destination-over";
+                            this.canvasContext.drawImage(this.buffers[0], 0, 0);
+                            this.canvasContext.setTransform(this.currentTransform);
+                            this.canvasContext.globalCompositeOperation = "source-over";
+                        }
+                    },
+                    renderFrame: function renderFrame(forceRender) {
                         if (this.hidden || this.data.hd) return;
+                        if (1 === this.data.td && !forceRender) return;
                         this.renderTransform();
                         this.renderRenderable();
                         this.setBlendMode();
                         var forceRealStack = 0 === this.data.ty;
+                        this.prepareLayer();
                         this.globalData.renderer.save(forceRealStack);
                         this.globalData.renderer.ctxTransform(this.finalTransform.mat.props);
                         this.globalData.renderer.ctxOpacity(this.finalTransform.mProp.o.v);
                         this.renderInnerContent();
                         this.globalData.renderer.restore(forceRealStack);
+                        this.exitLayer();
                         if (this.maskManager.hasMasks) this.globalData.renderer.restore(true);
                         if (this._isFirstFrame) this._isFirstFrame = false;
                     },
@@ -10700,22 +10869,25 @@
                         return;
                     }
                     this.transformMat.cloneFromProps(props);
-                    var cProps = this.contextData.cTr.props;
+                    var currentTransform = this.contextData.getTransform();
+                    var cProps = currentTransform.props;
                     this.transformMat.transform(cProps[0], cProps[1], cProps[2], cProps[3], cProps[4], cProps[5], cProps[6], cProps[7], cProps[8], cProps[9], cProps[10], cProps[11], cProps[12], cProps[13], cProps[14], cProps[15]);
-                    this.contextData.cTr.cloneFromProps(this.transformMat.props);
-                    var trProps = this.contextData.cTr.props;
+                    currentTransform.cloneFromProps(this.transformMat.props);
+                    var trProps = currentTransform.props;
                     this.canvasContext.setTransform(trProps[0], trProps[1], trProps[4], trProps[5], trProps[12], trProps[13]);
                 };
                 CanvasRendererBase.prototype.ctxOpacity = function(op) {
+                    var currentOpacity = this.contextData.getOpacity();
                     if (!this.renderConfig.clearCanvas) {
                         this.canvasContext.globalAlpha *= op < 0 ? 0 : op;
-                        this.globalData.currentGlobalAlpha = this.contextData.cO;
+                        this.globalData.currentGlobalAlpha = currentOpacity;
                         return;
                     }
-                    this.contextData.cO *= op < 0 ? 0 : op;
-                    if (this.globalData.currentGlobalAlpha !== this.contextData.cO) {
-                        this.canvasContext.globalAlpha = this.contextData.cO;
-                        this.globalData.currentGlobalAlpha = this.contextData.cO;
+                    currentOpacity *= op < 0 ? 0 : op;
+                    this.contextData.setOpacity(currentOpacity);
+                    if (this.globalData.currentGlobalAlpha !== currentOpacity) {
+                        this.canvasContext.globalAlpha = currentOpacity;
+                        this.globalData.currentGlobalAlpha = currentOpacity;
                     }
                 };
                 CanvasRendererBase.prototype.reset = function() {
@@ -10731,13 +10903,7 @@
                         return;
                     }
                     if (actionFlag) this.canvasContext.save();
-                    var props = this.contextData.cTr.props;
-                    if (this.contextData._length <= this.contextData.cArrPos) this.contextData.duplicate();
-                    var i;
-                    var arr = this.contextData.saved[this.contextData.cArrPos];
-                    for (i = 0; i < 16; i += 1) arr[i] = props[i];
-                    this.contextData.savedOp[this.contextData.cArrPos] = this.contextData.cO;
-                    this.contextData.cArrPos += 1;
+                    this.contextData.push();
                 };
                 CanvasRendererBase.prototype.restore = function(actionFlag) {
                     if (!this.renderConfig.clearCanvas) {
@@ -10748,17 +10914,13 @@
                         this.canvasContext.restore();
                         this.globalData.blendMode = "source-over";
                     }
-                    this.contextData.cArrPos -= 1;
-                    var popped = this.contextData.saved[this.contextData.cArrPos];
-                    var i;
-                    var arr = this.contextData.cTr.props;
-                    for (i = 0; i < 16; i += 1) arr[i] = popped[i];
-                    this.canvasContext.setTransform(popped[0], popped[1], popped[4], popped[5], popped[12], popped[13]);
-                    popped = this.contextData.savedOp[this.contextData.cArrPos];
-                    this.contextData.cO = popped;
-                    if (this.globalData.currentGlobalAlpha !== popped) {
-                        this.canvasContext.globalAlpha = popped;
-                        this.globalData.currentGlobalAlpha = popped;
+                    var popped = this.contextData.pop();
+                    var transform = popped.transform;
+                    var opacity = popped.opacity;
+                    this.canvasContext.setTransform(transform[0], transform[1], transform[4], transform[5], transform[12], transform[13]);
+                    if (this.globalData.currentGlobalAlpha !== opacity) {
+                        this.canvasContext.globalAlpha = opacity;
+                        this.globalData.currentGlobalAlpha = opacity;
                     }
                 };
                 CanvasRendererBase.prototype.configAnimation = function(animData) {
@@ -12929,9 +13091,16 @@
                                 elem.textProperty.getValue();
                                 var stringValue = elem.textProperty.currentData.t;
                                 if (stringValue !== _prevValue) {
-                                    elem.textProperty.currentData.t = _prevValue;
+                                    _prevValue = elem.textProperty.currentData.t;
                                     _sourceText = new String(stringValue);
                                     _sourceText.value = stringValue || new String(stringValue);
+                                    Object.defineProperty(_sourceText, "style", {
+                                        get: function get() {
+                                            return {
+                                                fillColor: elem.textProperty.currentData.fc
+                                            };
+                                        }
+                                    });
                                 }
                                 return _sourceText;
                             }
@@ -14095,12 +14264,14 @@
                         return feMerge;
                     }
                 };
+                var linearFilterValue = "0.3333 0.3333 0.3333 0 0 0.3333 0.3333 0.3333 0 0 0.3333 0.3333 0.3333 0 0 0 0 0";
                 function SVGTintFilter(filter, filterManager, elem, id, source) {
                     this.filterManager = filterManager;
                     var feColorMatrix = createNS("feColorMatrix");
                     feColorMatrix.setAttribute("type", "matrix");
                     feColorMatrix.setAttribute("color-interpolation-filters", "linearRGB");
-                    feColorMatrix.setAttribute("values", "0.3333 0.3333 0.3333 0 0 0.3333 0.3333 0.3333 0 0 0.3333 0.3333 0.3333 0 0 0 0 0 1 0");
+                    feColorMatrix.setAttribute("values", linearFilterValue + " 1 0");
+                    this.linearFilter = feColorMatrix;
                     feColorMatrix.setAttribute("result", id + "_tint_1");
                     filter.appendChild(feColorMatrix);
                     feColorMatrix = createNS("feColorMatrix");
@@ -14119,7 +14290,8 @@
                         var colorBlack = this.filterManager.effectElements[0].p.v;
                         var colorWhite = this.filterManager.effectElements[1].p.v;
                         var opacity = this.filterManager.effectElements[2].p.v / 100;
-                        this.matrixFilter.setAttribute("values", colorWhite[0] - colorBlack[0] + " 0 0 0 " + colorBlack[0] + " " + (colorWhite[1] - colorBlack[1]) + " 0 0 0 " + colorBlack[1] + " " + (colorWhite[2] - colorBlack[2]) + " 0 0 0 " + colorBlack[2] + " 0 0 0 " + opacity + " 0");
+                        this.linearFilter.setAttribute("values", linearFilterValue + " " + opacity + " 0");
+                        this.matrixFilter.setAttribute("values", colorWhite[0] - colorBlack[0] + " 0 0 0 " + colorBlack[0] + " " + (colorWhite[1] - colorBlack[1]) + " 0 0 0 " + colorBlack[1] + " " + (colorWhite[2] - colorBlack[2]) + " 0 0 0 " + colorBlack[2] + " 0 0 0 1 0");
                     }
                 };
                 function SVGFillFilter(filter, filterManager, elem, id) {

@@ -77,3 +77,8 @@ h6 {
    font-weight: inherit;
    font-size: inherit;
 }
+
+picture {
+   position: static !important;
+   z-index: inherit !important;
+}

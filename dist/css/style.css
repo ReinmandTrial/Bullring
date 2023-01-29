@@ -216,6 +216,11 @@ h6 {
   font-size: inherit;
 }
 
+picture {
+  position: static !important;
+  z-index: inherit !important;
+}
+
 .lock body {
   overflow: hidden;
   -ms-touch-action: none;
@@ -1324,6 +1329,7 @@ h6 {
 }
 
 .first-step__item {
+  position: relative;
   padding: 15px 80px 15px 20px;
   height: 150px;
   display: -webkit-box;
@@ -3232,6 +3238,12 @@ h6 {
     -webkit-box-flex: 0;
         -ms-flex: 0 1 432px;
             flex: 0 1 432px;
+  }
+
+  .reivest-popup__slide {
+    -webkit-box-flex: 0;
+        -ms-flex: 0 1 305px;
+            flex: 0 1 305px;
   }
 }
 

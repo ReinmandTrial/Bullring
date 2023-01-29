@@ -132,6 +132,9 @@
       @media (max-width: 767.98px) {
          flex: none;
       }
+      @media (max-width: 1860px) {
+         flex: 0 1 305px;
+      }
       .first-step__range {
          padding: 4px 14px;
          span {
