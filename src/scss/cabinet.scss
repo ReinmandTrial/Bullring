@@ -1,7 +1,5 @@
 .cabinet {
    background: url('@img/cabinet/bg.jpg') 50% 0 / cover no-repeat;
-   @media (max-width: 991.98px) {
-   }
    &__page {
       display: none;
       &._active-body {
