@@ -531,6 +531,37 @@ picture {
 .popup__wrap {
   max-width: 690px;
   width: 100%;
+  -webkit-transform: scale(0);
+      -ms-transform: scale(0);
+          transform: scale(0);
+  -webkit-transition: all 0.3s ease 0s;
+  -o-transition: all 0.3s ease 0s;
+  transition: all 0.3s ease 0s;
+}
+
+.popup__wrap::after {
+  -webkit-transition: all 0.3s ease 0s;
+  -o-transition: all 0.3s ease 0s;
+  transition: all 0.3s ease 0s;
+  backdrop-filter: blur(0px);
+  -webkit-backdrop-filter: blur(0px);
+}
+
+._popup-open .popup__wrap {
+  -webkit-transform: scale(1);
+      -ms-transform: scale(1);
+          transform: scale(1);
+  -webkit-transition: all 0.3s ease 0s;
+  -o-transition: all 0.3s ease 0s;
+  transition: all 0.3s ease 0s;
+}
+
+._popup-open .popup__wrap::after {
+  -webkit-transition: all 0.3s ease 0s;
+  -o-transition: all 0.3s ease 0s;
+  transition: all 0.3s ease 0s;
+  backdrop-filter: blur(24.5px);
+  -webkit-backdrop-filter: blur(24.5px);
 }
 
 .popup__content {
@@ -3497,7 +3528,6 @@ picture {
 @media (max-width: 991.98px) {
   .wrapper::after {
     content: "";
-    display: none;
     position: absolute;
     width: 100%;
     height: 100%;
@@ -3506,13 +3536,24 @@ picture {
     background: -webkit-gradient(linear, left top, left bottom, from(rgba(13, 63, 63, 0.4)), to(rgba(0, 0, 0, 0)));
     background: -o-linear-gradient(top, rgba(13, 63, 63, 0.4) 0%, rgba(0, 0, 0, 0) 100%);
     background: linear-gradient(180deg, rgba(13, 63, 63, 0.4) 0%, rgba(0, 0, 0, 0) 100%);
-    backdrop-filter: blur(24.5px);
-    -webkit-backdrop-filter: blur(24.5px);
+    backdrop-filter: blur(0px);
+    -webkit-backdrop-filter: blur(0px);
     z-index: 100;
+    -webkit-transition: all 0.3s ease 0s;
+    -o-transition: all 0.3s ease 0s;
+    transition: all 0.3s ease 0s;
+    opacity: 0;
+    visibility: hidden;
   }
 
   .menu-open .wrapper::after {
-    display: block;
+    visibility: visible;
+    -webkit-transition: all 0.3s ease 0s;
+    -o-transition: all 0.3s ease 0s;
+    transition: all 0.3s ease 0s;
+    opacity: 1;
+    backdrop-filter: blur(24.5px);
+    -webkit-backdrop-filter: blur(24.5px);
   }
 
   .popup__close-btn {
