@@ -1,3 +1,5 @@
+export let bodyLockStatus = true
+
 export function isWebp() {
    // Проверка поддержки webp
    function testWebP(callback) {
@@ -39,7 +41,7 @@ export function menuClose() {
    bodyUnlock()
    document.documentElement.classList.remove('menu-open')
 }
-export let bodyLockStatus = true
+
 export let bodyLockToggle = (delay = 500) => {
    if (document.documentElement.classList.contains('lock')) {
       bodyUnlock(delay)
@@ -87,5 +89,11 @@ export function debounce(fn, timeout = 300) {
    return (...rest) => {
       clearTimeout(timerId)
       timerId = setTimeout(() => fn(...rest), timeout)
+   }
+}
+export function isHasClass(el, ...arg) {
+   for (let i = 0; i < arg.length; i++) {
+      if (!el.classList.contains(arg[i])) continue
+      return arg[i]
    }
 }

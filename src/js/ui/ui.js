@@ -4,6 +4,7 @@ import './base/copy.js'
 import './base/popup.js'
 import './base/pagination.js'
 import './base/smoothScroll.js'
+import './base/locales.js'
 //Import Cabinet Features========================================================================================================================================================
 import './cabinet/cabinetNav.js'
 import './cabinet/caclStepTwo.js'
