@@ -47,8 +47,9 @@
       width: 100%;
       @media (max-width: 767.98px) {
          position: absolute;
-         bottom: 0;
+         bottom: 25px;
          left: 50%;
+         z-index: 2;
          transform: translate(-50%, 0px);
       }
       @media (max-width: 575.98px) {
@@ -70,15 +71,34 @@
       }
    }
 
-   &__img {
+   &__rocket {
       width: 450px;
-      img {
-         height: 100%;
-         width: 100%;
-         object-fit: contain;
-         @media (max-width: 767.98px) {
-            object-fit: cover;
-         }
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+   }
+
+   &__rocket-bg {
+      height: 100%;
+      width: 100%;
+      object-fit: contain;
+      margin-top: 80px;
+      @media (max-width: 767.98px) {
+         object-fit: cover;
+         margin-top: 120px;
+      }
+   }
+
+   &__rocket-animation {
+      position: absolute;
+      top: -120px;
+      left: 50%;
+      transform: translate(-49%, 0px);
+      width: 1000px;
+      cursor: pointer;
+      @media (max-width: 767.98px) {
+         top: -70px;
       }
    }
 }
