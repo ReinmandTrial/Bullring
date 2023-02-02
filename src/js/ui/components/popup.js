@@ -1,5 +1,5 @@
 import { bodyUnlock, bodyLock } from '../base/utility.js'
-import { reinvesSlider } from '../cabinet/cabinetPopups.js'
+import { reinvesSlider } from '../cabinet/reinvestPopup.js'
 import { isHasClass } from '../base/utility.js'
 const allPopupsBtn = document.querySelectorAll('[data-popup]')
 const allPopups = document.querySelectorAll('.popup')

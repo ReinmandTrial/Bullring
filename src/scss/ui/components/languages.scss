@@ -1,0 +1,91 @@
+.languages {
+   position: relative;
+   &__head {
+      width: 38px;
+      height: 38px;
+      transition: all 0.3s ease 0s;
+      &:active {
+         transition: all 0.1s ease 0s;
+         transform: scale(1.05);
+      }
+      img {
+         width: 100%;
+         height: 100%;
+         object-fit: contain;
+         pointer-events: none;
+      }
+   }
+
+   &__body {
+      position: absolute;
+      left: 50%;
+      transform: translate(-50%, 0px);
+      background: #ffffff;
+      box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.04), 0px 8px 16px rgba(0, 0, 0, 0.08);
+      border-radius: 10px;
+      padding: 16px 32px;
+      opacity: 0;
+      visibility: hidden;
+      animation: slide-bottom 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+      top: calc(100% + 55px);
+      transition: all 0.5s ease 0s;
+      @media (max-width: 991.98px) {
+         animation: none;
+         top: unset;
+         bottom: 15px;
+      }
+      ._open-lang & {
+         visibility: visible;
+         transition: all 0.5s ease 0s;
+         opacity: 1;
+         animation: slide-top 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+         @media (max-width: 991.98px) {
+            animation: none;
+            bottom: 70px;
+            top: unset;
+         }
+      }
+   }
+   @keyframes slide-top {
+      0% {
+         transform: translate(-50%, 0px);
+      }
+      100% {
+         transform: translate(-50%, -20px);
+      }
+   }
+   @keyframes slide-bottom {
+      0% {
+         transform: translate(-50%, 0px);
+      }
+      100% {
+         transform: translate(-50%, 100px);
+      }
+   }
+   &__item {
+      color: var(--black);
+      font-weight: 700;
+      font-size: 16px;
+      text-align: center;
+      padding: 10px 20px;
+      border-radius: 10px;
+      transition: all 0.1s ease 0s;
+      text-align: center;
+      margin: auto;
+      &._active {
+         background: linear-gradient(207.09deg, #1783b0 16.92%, #dc67ee 99.75%);
+         -webkit-background-clip: text;
+         -webkit-text-fill-color: transparent;
+         background-clip: text;
+         text-fill-color: transparent;
+         text-shadow: 0px 0px 4px rgba(0, 0, 0, 0.04), 0px 4px 8px rgba(0, 0, 0, 0.06);
+         font-weight: 700;
+         transition: all 0.3s ease 0s;
+      }
+      &:active {
+         transition: all 0.1s ease 0s;
+         background-color: rgba(40, 40, 40, 0.1);
+         transform: scale(0.95);
+      }
+   }
+}

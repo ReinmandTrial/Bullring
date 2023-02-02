@@ -1,0 +1,72 @@
+.compaunding {
+   position: relative;
+   width: 90%;
+   transform: translate(3%, 0px);
+   &__line {
+      display: block;
+      background: #ffffff;
+      border-radius: 5px;
+      height: 4px;
+      width: 100%;
+      @extend %mainBorder;
+      position: relative;
+      margin-bottom: 10px;
+      box-shadow: 0px 0px 1.33165px rgba(0, 0, 0, 0.04), 0px 2.6633px 5.3266px rgba(0, 0, 0, 0.08);
+   }
+   &__progress {
+      background: linear-gradient(180deg, rgba(138, 200, 7, 0.9) 0%, rgba(64, 107, 87, 0.9) 100%);
+      position: absolute;
+      width: 0%;
+      height: 100%;
+      top: 0;
+      left: 0;
+   }
+
+   &__rate {
+      display: flex;
+      span {
+         font-weight: 700;
+         font-size: 9px;
+         color: var(--black);
+         flex: 0 0 10%;
+         &:last-child {
+            transform: translate(-10%, 0px);
+         }
+      }
+   }
+
+   &__dots {
+      position: absolute;
+      top: -5px;
+      left: 0;
+      display: flex;
+      width: 100%;
+      height: 14px;
+   }
+   &__dot-box {
+      flex: 0 0 10%;
+      position: relative;
+      display: block;
+      height: 100%;
+   }
+   &__dot {
+      cursor: pointer;
+      position: absolute;
+      top: 0px;
+      left: 0px;
+      display: block;
+      width: 14px;
+      height: 14px;
+      background: #ffffff;
+      box-shadow: 0px 0px 1.59726px rgba(0, 0, 0, 0.04), 0px 3.19451px 6.38902px rgba(0, 0, 0, 0.08);
+      border-radius: 50%;
+      @extend %mainBorder;
+
+      &:last-child {
+         transform: translate(-10%, 0px);
+      }
+      &._active {
+         background: linear-gradient(180deg, rgba(138, 200, 7, 1) 0%, rgba(64, 107, 87, 1) 100%);
+      }
+   }
+}

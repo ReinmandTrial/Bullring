@@ -1,15 +1,17 @@
-//Import Common Features========================================================================================================================================================
+//Import Utility========================================================================================================================================================
 import * as utility from './base/utility.js'
-import './base/copy.js'
-import './base/popup.js'
-import './base/pagination.js'
-import './base/smoothScroll.js'
-import './base/locales.js'
-//Import Cabinet Features========================================================================================================================================================
-import './cabinet/cabinetNav.js'
-import './cabinet/caclStepTwo.js'
-import './cabinet/incomeImages.js'
-import './cabinet/cabinetPopups.js'
-//Init UI========================================================================================================================================================
 utility.isWebp()
 utility.menuInit()
+utility.pageNavigation()
+//Components========================================================================================================================================================
+import './components/animations.js'
+import './components/compaunding.js'
+import './components/copy.js'
+import './components/popup.js'
+import './components/pagination.js'
+import './components/locales.js'
+//Import Cabinet Features========================================================================================================================================================
+import './cabinet/navigation.js'
+import './cabinet/reinvestPopup.js'
+//Import Landing Features========================================================================================================================================================
+import './landing/landing.js'

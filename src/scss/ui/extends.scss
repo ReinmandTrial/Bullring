@@ -14,6 +14,7 @@
    }
    &::after {
       content: '';
+      pointer-events: none;
       display: block;
       position: absolute;
       width: 100%;

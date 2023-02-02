@@ -1,5 +1,5 @@
 import Swiper, { Pagination } from 'swiper'
-import { openPopup, closePopup } from '../base/popup.js'
+import { openPopup, closePopup } from '../components/popup.js'
 
 //ReivestSlider========================================================================================================================================================
 
