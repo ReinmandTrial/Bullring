@@ -49,3 +49,14 @@ import referralRockets from '../../../files/rokets.json'
       })
 })()
 
+!(function initReferralRockets() {
+   const block = document.querySelector('.landing-referral__rokets')
+   block &&
+      new Lottie.loadAnimation({
+         container: block,
+         renderer: 'canvas',
+         loop: true,
+         autoplay: true,
+         animationData: referralRockets,
+      })
+})()

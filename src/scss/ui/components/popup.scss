@@ -106,7 +106,7 @@
    }
    &__accept {
       @extend %mainBorder;
-      background: linear-gradient(180deg, #1783b0 0%, rgba(220, 103, 238, 0) 112.95%);
+      background: linear-gradient(180deg, #1783b0 0%, rgba(220, 103, 238, 0.5) 112.95%);
    }
 
    &__cancel {

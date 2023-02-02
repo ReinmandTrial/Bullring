@@ -11,10 +11,11 @@
 
    &__content {
       @extend %boxBg;
-      background: linear-gradient(180deg, rgba(23, 130, 176, 0.2) -10%, rgba(220, 103, 238, 0) 95%);
+      background: linear-gradient(180deg, rgba(23, 130, 176, 0.3) 0%, rgba(220, 103, 238, 0.1) 112.95%);
       padding: 25px;
       overflow: hidden;
       @media (max-width: 767.98px) {
+         background: linear-gradient(180deg, rgba(23, 130, 176, 0.2) -10%, rgba(220, 103, 238, 0) 95%);
          border: none;
          overflow: visible;
          padding: 25px 15px;
@@ -246,7 +247,7 @@
       padding: 10px 10px;
       margin: auto;
       margin-top: 20px;
-      background: linear-gradient(180deg, #1783b0 0%, rgba(220, 103, 238, 0) 112.95%);
+      background: linear-gradient(180deg, #1783b0 0%, rgba(220, 103, 238, 0.5) 112.95%);
       filter: drop-shadow(0px 0px 4px rgba(0, 0, 0, 0.04)) drop-shadow(0px 4px 8px rgba(0, 0, 0, 0.06));
    }
 }
