@@ -1,0 +1,130 @@
+.refer-statistics {
+   &__container-l {
+   }
+
+   &__content {
+      display: flex;
+      justify-content: space-between;
+      gap: 1%;
+      @media (max-width: 1200px) {
+         display: block;
+         max-width: 700px;
+         margin: auto;
+      }
+   }
+
+   &__block {
+      flex: 33%;
+      @media (max-width: 1200px) {
+         &:not(:last-child) {
+            margin-bottom: 10px;
+         }
+      }
+   }
+}
+.ref-statistic-block {
+   background: #ffffff;
+   box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.04), 0px 8px 16px rgba(0, 0, 0, 0.08);
+   border-radius: 10px;
+   padding: 15px 40px;
+   @media (max-width: 575.98px) {
+      padding: 20px 15px;
+   }
+   &__title {
+      font-weight: 700;
+      font-size: 22px;
+      text-align: center;
+      color: var(--black);
+      margin-bottom: 10px;
+      @media (max-width: 575.98px) {
+         font-size: 18px;
+      }
+   }
+
+   &__list {
+      display: flex;
+      align-items: start;
+      justify-content: space-between;
+      gap: 20px;
+      @media (max-width: 575.98px) {
+         gap: 10px;
+      }
+   }
+
+   &__item {
+      flex: 0 1 152px;
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+      &:nth-child(1) {
+         .ref-statistic-block__val {
+            background: linear-gradient(177.02deg, #81ba07 23.19%, #688235 90.83%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-fill-color: transparent;
+         }
+      }
+      &:nth-child(2) {
+         .ref-statistic-block__val {
+            background: linear-gradient(207.09deg, #1783b0 16.92%, #dc67ee 99.75%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-fill-color: transparent;
+         }
+      }
+      &:nth-child(3) {
+         .ref-statistic-block__val {
+            background: linear-gradient(177.02deg, #de5732 20.78%, #b23e23 78.06%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-fill-color: transparent;
+         }
+      }
+   }
+
+   &__val {
+      font-weight: 700;
+      font-size: 65px;
+      @extend %textShadow;
+      text-align: center;
+      word-break: break-all;
+      @media (max-width: 1440px) {
+         font-size: 35px;
+      }
+   }
+
+   &__coin {
+      text-align: center;
+      position: relative;
+      i {
+         font-size: 25px;
+      }
+      &::before,
+      &::after {
+         content: '';
+         top: 50%;
+         transform: translate(0px, -50%);
+         position: absolute;
+         display: block;
+         height: 1px;
+         background-color: rgba(220, 103, 238, 0.3);
+         width: calc((100% - 45px) / 2);
+      }
+      &::before {
+         left: 0;
+      }
+      &::after {
+         right: 0;
+      }
+   }
+
+   &__level {
+      font-weight: 400;
+      font-size: 16px;
+      text-align: center;
+      color: rgba(26, 26, 26, 0.6);
+   }
+}

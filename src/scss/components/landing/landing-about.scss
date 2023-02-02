@@ -1,0 +1,104 @@
+.landing-about {
+   padding-top: 135px;
+   @media (max-width: 991.98px) {
+      padding-top: 100px;
+   }
+   &__container {
+   }
+
+   &__content {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 20px;
+      max-width: 800px;
+      margin: auto;
+      position: relative;
+      @media (max-width: 767.98px) {
+         gap: 10px;
+      }
+   }
+
+   &__title {
+      font-weight: 700;
+      font-size: 55px;
+      line-height: 120%;
+      text-align: center;
+      padding: 0px 40px;
+      @media (max-width: 767.98px) {
+         font-size: 25px;
+         padding: 0px 20px;
+      }
+   }
+
+   &__descr {
+      font-size: 22px;
+      text-align: center;
+      line-height: 120%;
+      @media (max-width: 767.98px) {
+         font-size: 16px;
+      }
+   }
+
+   &__buttons {
+      display: flex;
+      justify-content: center;
+      gap: 12px 25px;
+      width: 100%;
+      @media (max-width: 767.98px) {
+         position: absolute;
+         bottom: 25px;
+         left: 50%;
+         z-index: 2;
+         transform: translate(-50%, 0px);
+      }
+      @media (max-width: 575.98px) {
+         flex-direction: column;
+         align-items: center;
+      }
+   }
+
+   &__button {
+      box-shadow: 0px 10px 20px rgba(255, 172, 172, 0.25);
+      @media (max-width: 575.98px) {
+         max-width: 290px;
+      }
+      &:nth-child(1) {
+         background: linear-gradient(180deg, #636cbb 0%, #536dc9 100%);
+      }
+      &:nth-child(2) {
+         background: linear-gradient(180deg, #1783b0 0%, #55ace3 174.68%);
+      }
+   }
+
+   &__rocket {
+      width: 450px;
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+   }
+
+   &__rocket-bg {
+      height: 100%;
+      width: 100%;
+      object-fit: contain;
+      margin-top: 80px;
+      @media (max-width: 767.98px) {
+         object-fit: cover;
+         margin-top: 120px;
+      }
+   }
+
+   &__rocket-animation {
+      position: absolute;
+      top: -120px;
+      left: 50%;
+      transform: translate(-49%, 0px);
+      width: 1000px;
+      cursor: pointer;
+      @media (max-width: 767.98px) {
+         top: -70px;
+      }
+   }
+}
