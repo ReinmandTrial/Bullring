@@ -42,14 +42,14 @@ export function menuClose() {
    document.documentElement.classList.remove('menu-open')
 }
 
-export let bodyLockToggle = (delay = 500) => {
+export let bodyLockToggle = (delay = 300) => {
    if (document.documentElement.classList.contains('lock')) {
       bodyUnlock(delay)
    } else {
       bodyLock(delay)
    }
 }
-export let bodyUnlock = (delay = 500) => {
+export let bodyUnlock = (delay = 300) => {
    let body = document.querySelector('body')
    if (bodyLockStatus) {
       let lock_padding = document.querySelectorAll('[data-lp]')
@@ -67,7 +67,7 @@ export let bodyUnlock = (delay = 500) => {
       }, delay)
    }
 }
-export let bodyLock = (delay = 500) => {
+export let bodyLock = (delay = 300) => {
    let body = document.querySelector('body')
    if (bodyLockStatus) {
       let lock_padding = document.querySelectorAll('[data-lp]')
