@@ -3,6 +3,7 @@ import * as utility from './base/utility.js'
 utility.isWebp()
 utility.menuInit()
 utility.pageNavigation()
+utility.showMore()
 //Components========================================================================================================================================================
 import './components/animations.js'
 import './components/compaunding.js'
