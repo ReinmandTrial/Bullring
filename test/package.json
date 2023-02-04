@@ -1,0 +1,19 @@
+{
+  "name": "test-stable-contract",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha --timeout 300000",
+    "start": "node node_modules/ganache-cli/cli.js -i 1 -a 10 --networkId 1 --chainId 1 -l 80000000 -e 100000 -m \"chest goose normal lemon garden mystery situate chair various artist search share\""
+  },
+  "author": "https://t.me/nadozirny_s",
+  "license": "ISC",
+  "dependencies": {
+    "cross-fetch": "^3.1.5",
+    "ganache-cli": "^6.12.2",
+    "mocha": "^8.3.2",
+    "solc": "^0.8.13",
+    "truffle-hdwallet-provider": "^0.0.3",
+    "web3": "^1.8.0"
+  }
+}
