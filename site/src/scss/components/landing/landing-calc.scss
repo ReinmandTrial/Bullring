@@ -236,11 +236,7 @@
    }
 
    &__income {
-      &.income__content {
-         @media (max-width: 400.98px) {
-            margin: 0 -15px;
-         }
-      }
+
    }
 
    &__comissions {
@@ -257,6 +253,12 @@
    }
 
    &__compaunding {
+      .compaunding {
+         @media (max-width: 991.98px) {
+            width: 96%;
+            transform: translate(2%, 0px);
+         }
+      }
    }
 }
 .landing-calc-input {
@@ -346,6 +348,12 @@
       @media (max-width: 575.98px) {
          padding: 8px 5px;
          font-size: 15px;
+      }
+      @media (any-hover: hover) {
+         &:hover {
+            transition: all 0.3s ease 0s;
+            transform: scale(1.05);
+         }
       }
       &:active {
          transition: all 0.1s ease 0s;

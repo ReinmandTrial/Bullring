@@ -46,6 +46,7 @@
       font-weight: 600;
       cursor: pointer;
       transition: all 0.3s ease 0s;
+      border: 1px solid transparent;
       @media (any-hover: hover) {
          &:hover {
             border: 1px solid #1783b0;

@@ -103,6 +103,16 @@
       @media (max-width: 400.98px) {
          max-width: none;
       }
+      @media (any-hover: hover) {
+         &:hover {
+            transform: scale(1.05);
+            transition: all 0.3s ease 0s;
+         }
+      }
+      &:active {
+         transform: scale(0.95);
+         transition: all 0.1s ease 0s;
+      }
    }
    &__accept {
       @extend %mainBorder;

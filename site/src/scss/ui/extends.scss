@@ -97,6 +97,19 @@
    text-shadow: 0px 0px 4px rgba(0, 0, 0, 0.04), 0px 4px 8px rgba(0, 0, 0, 0.06);
 }
 
+%hover-active {
+   @media (any-hover: hover) {
+      &:hover {
+         transform: scale(1.05);
+         transition: all 0.3s ease 0s;
+      }
+   }
+   &:active {
+      transition: all 0.1s ease 0s;
+      transform: scale(0.95);
+   }
+}
+
 %navigationHover {
    position: relative;
    &::before {

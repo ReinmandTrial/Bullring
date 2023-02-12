@@ -70,61 +70,19 @@
          <div class="popup__content">
             <h3 class="popup-title">Reinvest</h3>
             <div class="reivest-popup__slider swiper">
-               <div class="reivest-popup__wrapper swiper-wrapper first-step">
-                  <label class="reivest-popup__slide swiper-slide first-step__item">
-                     <input class="first-step__input" type="radio" name="cabinet-popup" />
-                     <span class="first-step__style"></span>
-                     <span class="first-step__range">
-                        <i class="_icon-busd"></i>
-                        <span>0.01- 2 BUSD</span>
-                     </span>
-                     <span class="first-step__percent">1% daily</span>
-                     <img class="first-step__decor-bottom" src="@img/cabinet/steps-decor.svg" alt="decor" />
-                     <img class="first-step__decor-top" src="@img/cabinet/steps-decor-circle.svg" alt="decor" />
-                     <img class="first-step__decor-mobile" src="@img/cabinet/steps-decor-mob.svg" alt="decor" />
-                     <span class="first-step__shadow"></span>
-                  </label>
-                  <label class="reivest-popup__slide swiper-slide first-step__item">
-                     <input checked class="first-step__input" type="radio" name="cabinet-popup" />
-                     <span class="first-step__style"></span>
-                     <span class="first-step__range">
-                        <i class="_icon-busd"></i>
-                        <span>0.01- 5 BUSD</span>
-                     </span>
-                     <span class="first-step__percent">1.2% daily</span>
-                     <img class="first-step__decor-bottom" src="@img/cabinet/steps-decor.svg" alt="decor" />
-                     <img class="first-step__decor-top" src="@img/cabinet/steps-decor-circle.svg" alt="decor" />
-                     <img class="first-step__decor-mobile" src="@img/cabinet/steps-decor-mob.svg" alt="decor" />
-                     <span class="first-step__shadow"></span>
-                  </label>
-                  <label class="reivest-popup__slide swiper-slide first-step__item">
-                     <input class="first-step__input" type="radio" name="cabinet-popup" />
-                     <span class="first-step__style"></span>
-                     <span class="first-step__range">
-                        <i class="_icon-busd"></i>
-                        <span>0.01- 15 BUSD</span>
-                     </span>
-                     <span class="first-step__percent">1.5% daily</span>
-                     <img class="first-step__decor-bottom" src="@img/cabinet/steps-decor.svg" alt="decor" />
-                     <img class="first-step__decor-top" src="@img/cabinet/steps-decor-circle.svg" alt="decor" />
-                     <img class="first-step__decor-mobile" src="@img/cabinet/steps-decor-mob.svg" alt="decor" />
-                     <span class="first-step__shadow"></span>
-                  </label>
-                  <label class="reivest-popup__slide swiper-slide first-step__item">
-                     <input class="first-step__input" type="radio" name="cabinet-popup" />
-                     <span class="first-step__style"></span>
-                     <span class="first-step__range">
-                        <i class="_icon-busd"></i>
-                        <span>0.01-40 BUSD</span>
-                     </span>
-                     <span class="first-step__percent">1.7% daily</span>
-                     <img class="first-step__decor-bottom" src="@img/cabinet/steps-decor.svg" alt="decor" />
-                     <img class="first-step__decor-top" src="@img/cabinet/steps-decor-circle.svg" alt="decor" />
-                     <img class="first-step__decor-mobile" src="@img/cabinet/steps-decor-mob.svg" alt="decor" />
-                     <span class="first-step__shadow"></span>
-                  </label>
-               </div>
+               <!--Daily-profit-->
+               @@include('./UI-daily-profit.htm',
+               {"wrapClass":"reivest-popup__wrapper swiper-wrapper",
+               "slideClass":"reivest-popup__slide swiper-slide" })
+               <!--End Daily-profit-->
                <div class="reivest-popup__pagination swiper-pagination"></div>
+            </div>
+            <div data-comp class="reivest-popup__compainding">
+               <h5 class="reivest-popup__comp-title">Сompaunding</h5>
+               <input data-comp-val class="reivest-popup__comp-input" type="text" />
+               <!--Compaunding-->
+               @@include('./UI-compaunding.htm',{"title":"Bullring" })
+               <!--End Compaunding-->
             </div>
             <div class="reivest-popup__bottom">
                <input class="reivest-popup__input" placeholder="Enter amount" type="number" />

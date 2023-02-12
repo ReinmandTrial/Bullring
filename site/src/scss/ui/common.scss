@@ -5,6 +5,8 @@
 @import './components/popup.scss';
 @import './components/social-links.scss';
 @import './components/compaunding.scss';
+@import './components/first-step.scss';
+@import './components/income.scss';
 
 //Burger Icon========================================================================================================================================================
 .icon-menu {
@@ -90,10 +92,8 @@
    max-width: 225px;
    width: 100%;
    transition: all 0.1s ease 0s;
-   &:active {
-      transition: all 0.1s ease 0s;
-      transform: scale(0.95);
-   }
+   transform: scale(1);
+   @extend %hover-active;
    span {
       font-weight: 700;
    }
