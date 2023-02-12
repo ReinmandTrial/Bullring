@@ -33,10 +33,14 @@
       width: 100%;
       min-width: 180px;
       padding: 25px 10px;
-      span,
       i,
       img {
          flex: none;
+         font-size: 24px;
+         height: 24px;
+      }
+      ._icon-book {
+         transform: rotate(90deg);
       }
    }
 }

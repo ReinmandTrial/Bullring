@@ -1,7 +1,5 @@
 .compaunding {
    position: relative;
-   width: 90%;
-   transform: translate(3%, 0px);
    &__line {
       display: block;
       background: #ffffff;
@@ -29,8 +27,9 @@
          font-size: 9px;
          color: var(--black);
          flex: 0 0 10%;
+         transform: translate(-19%, 0px);
          &:last-child {
-            transform: translate(-10%, 0px);
+            transform: translate(-25%, 0px);
          }
       }
    }
@@ -61,10 +60,7 @@
       box-shadow: 0px 0px 1.59726px rgba(0, 0, 0, 0.04), 0px 3.19451px 6.38902px rgba(0, 0, 0, 0.08);
       border-radius: 50%;
       @extend %mainBorder;
-
-      &:last-child {
-         transform: translate(-10%, 0px);
-      }
+      transform: translate(-50%, 0px);
       &._active {
          background: linear-gradient(180deg, rgba(138, 200, 7, 1) 0%, rgba(64, 107, 87, 1) 100%);
       }

@@ -2,36 +2,44 @@
    <div class="header__container-l">
       <div class="header__content">
          <div class="header__body">
-            <a href="./index.html" class="header__logo"><img src="@img/logo.svg" alt="logo" /></a>
+            <a href="./index.html" class="header__logo"><img src='@img/1px.png' data-src="@img/logo.svg" alt="logo" /></a>
             <nav class="header__menu landing-menu">
-               <button  data-goto-top="50" data-goto-header data-goto=".landing-about" type="button" class="landing-menu__item">About</button>
-               <button  data-goto-top="50" data-goto-header data-goto=".landing-calc" type="button" class="landing-menu__item">Plans</button>
-               <button  data-goto-top="50" data-goto-header data-goto=".landing-audits" type="button" class="landing-menu__item">Audits</button>
-               <button  data-goto-top="50" data-goto-header data-goto=".landing-features" type="button" class="landing-menu__item _active">Features</button>
-               <button  data-goto-top="50" data-goto-header data-goto=".landing-referral" type="button" class="landing-menu__item">Referral</button>
-               <button  data-goto-top="50" data-goto-header data-goto=".landing-download" type="button" class="landing-menu__item">Download</button>
-            </nav>
-            <div class="header__lang languages">
-               <button type="button" class="languages__head">
-                  <img src="@img/web.svg" alt="languages" />
+               <button data-goto-top="50" data-goto-header data-goto=".landing-about" type="button" class="landing-menu__item">
+                  About
                </button>
-               <div class="languages__body">
-                  <button type="button" class="languages__item _active">Language</button>
-                  <button type="button" class="languages__item">Language</button>
-                  <button type="button" class="languages__item">Language</button>
-                  <button type="button" class="languages__item">Language</button>
-                  <button type="button" class="languages__item">Language</button>
-               </div>
+               <button data-goto-top="50" data-goto-header data-goto=".landing-calc" type="button" class="landing-menu__item">Plans</button>
+               <button data-goto-top="50" data-goto-header data-goto=".landing-audits" type="button" class="landing-menu__item">
+                  Audits
+               </button>
+               <button data-goto-top="50" data-goto-header data-goto=".landing-features" type="button" class="landing-menu__item _active">
+                  Features
+               </button>
+               <button data-goto-top="50" data-goto-header data-goto=".landing-referral" type="button" class="landing-menu__item">
+                  Referral
+               </button>
+               <button data-goto-top="50" data-goto-header data-goto=".landing-download" type="button" class="landing-menu__item">
+                  Download
+               </button>
+            </nav>
+            <div class="header__social-links">
+               <!--Social links-->
+               @@include('./UI-social-links.htm',{})
+               <!--End Social links-->
+            </div>
+            <div class="header__lang">
+               <!--Languages-->
+               @@include('./UI-languages.htm',{})
+               <!--End Languages-->
             </div>
             <div class="header__buttons-block">
                <button type="button" class="header__button button"><i class="_icon-wallet"></i> <span>Connect Wallet</span></button>
             </div>
          </div>
          <div class="header__mobile-header landing-mobile-header">
-            <a href="./index.html" class="landing-mobile-header__logo"><img src="@img/logo.svg" alt="logo" /></a>
+            <a href="./index.html" class="landing-mobile-header__logo"><img src='@img/1px.png' data-src="@img/logo.svg" alt="logo" /></a>
             <button type="button" class="landing-mobile-header__burger icon-menu">
-               <img class="icon-menu__close" src="@img/burger-close.svg" alt="menu-close" />
-               <img class="icon-menu__open" src="@img/burger-open.svg" alt="menu-open" />
+               <img src='@img/1px.png' class="icon-menu__close" data-src="@img/burger-close.svg" alt="menu-close" />
+               <img src='@img/1px.png' class="icon-menu__open" data-src="@img/burger-open.svg" alt="menu-open" />
             </button>
          </div>
       </div>

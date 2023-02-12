@@ -328,6 +328,17 @@
       border-radius: 10px;
       font-weight: 700;
       padding: 19px 5px;
+      transition: all 0.3s ease 0s;
+      @media (any-hover: hover) {
+         &:hover {
+            transition: all 0.3s ease 0s;
+            background: rgba(187, 87, 202, 0.7);
+         }
+      }
+      &:active {
+         transition: all 0.1s ease 0s;
+         transform: scale(0.95);
+      }
       @media (max-width: 575.98px) {
          max-width: 300px;
          width: 100%;

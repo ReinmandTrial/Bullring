@@ -108,7 +108,7 @@
       display: flex;
       align-items: center;
       gap: 10px;
-      @extend %navigationHover;
+      // @extend %navigationHover;
       transition: all 0.3s ease 0s;
       &:active {
          transition: all 0.1s ease 0s;

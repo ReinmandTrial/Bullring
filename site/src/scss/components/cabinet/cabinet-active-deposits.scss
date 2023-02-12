@@ -360,6 +360,7 @@
       padding: 10px;
       max-width: 120px;
       width: 100%;
+      @extend %hover-active;
       @media (max-width: 1200px) {
          max-width: calc(50% - 5px);
       }
@@ -460,6 +461,7 @@
       padding: 8px;
       max-width: 85px;
       width: 100%;
+      @extend %hover-active;
       @media (max-width: 1200px) {
          max-width: 120px;
       }

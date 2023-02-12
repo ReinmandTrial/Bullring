@@ -3,13 +3,7 @@
       <div class="cabinet-header__content">
          <div class="cabinet-header__body">
             <nav class="cabinet-header__menu cabinet-menu">
-               <button
-                  data-nav-cabinet-btn="1"
-                  data-goto-top="20"
-                  data-goto="#cabinetHome"
-                  type="button"
-                  class="cabinet-menu__item _active-nav"
-               >
+               <button data-nav-cabinet-btn="1" data-goto-top="20" data-goto="#cabinetHome" type="button" class="cabinet-menu__item _active-nav">
                   <i class="_icon-home"></i>
                   <span>Home</span>
                </button>
@@ -20,22 +14,13 @@
             </nav>
             <div class="cabinet-header__logo-box">
                <a href="./index.html" class="cabinet-header__logo">
-                  <img src="@img/logo.svg" alt="logo" />
+                  <img src='@img/1px.png' data-src="@img/logo.svg" alt="logo" />
                </a>
             </div>
             <div class="cabinet-header__social-links social-links">
-               <a href="#" class="social-links__item">
-                  <img src="@img/telegram-chat.svg" alt="telegram-chat" />
-               </a>
-               <a href="#" class="social-links__item">
-                  <img src="@img/telegram-channel.svg" alt="telegram-channel" />
-               </a>
-               <a href="#" class="social-links__item">
-                  <img src="@img/twitter.svg" alt="twitter" />
-               </a>
-               <a href="#" class="social-links__item">
-                  <img src="@img/discord.svg" alt="discord" />
-               </a>
+               <!--Social-links-->
+               @@include('./UI-social-links.htm',{})
+               <!--End Social-links-->
             </div>
             <div class="cabinet-header__user-info user-info">
                <div class="user-info__wallet wallet-balance">
@@ -49,12 +34,12 @@
                      <span>Exit</span>
                   </button>
                </div>
-               <div class="user-info__dropdown user-dropdown">
+               <!-- <div class="user-info__dropdown user-dropdown">
                   <button type="button" class="user-dropdown__head">
                      <i class="_icon-user"></i>
                   </button>
                   <div class="user-dropdown__body"></div>
-               </div>
+               </div> -->
             </div>
          </div>
          <div class="cabinet-header__mobile-header cabinet-mobile-header">
@@ -71,8 +56,8 @@
                </div>
             </div>
             <button type="button" class="cabinet-mobile-header__burger icon-menu">
-               <img class="icon-menu__close" src="@img/burger-close.svg" alt="menu-close" />
-               <img class="icon-menu__open" src="@img/burger-open.svg" alt="menu-open" />
+               <img src='@img/1px.png' class="icon-menu__close" data-src="@img/burger-close.svg" alt="menu-close" />
+               <img src='@img/1px.png' class="icon-menu__open" data-src="@img/burger-open.svg" alt="menu-open" />
             </button>
          </div>
       </div>
