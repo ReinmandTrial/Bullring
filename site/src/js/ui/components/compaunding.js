@@ -14,7 +14,7 @@ function initCompaunding(comp) {
    const hammerManager = new Hammer.Manager(comp)
    hammerManager.add(new Hammer.Swipe())
 
-   let activeDot = 4
+   let activeDot = 1
 
    render()
 
