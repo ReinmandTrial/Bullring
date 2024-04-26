@@ -1,1 +1,10 @@
 /site/node_modules
+/site/node_modules/
+/site/package-lock.json
+/site/dist/
+/site/.gitignore
+/site/undefined
+/site/**/*.zip
+/site/Source/
+/site/**/*.rar
+/site/version.json
